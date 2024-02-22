@@ -37,6 +37,11 @@ return {
           null_ls.builtins.formatting.isort.with(null_ls_python_virtualenv_tool_config("isort")),
           null_ls.builtins.diagnostics.flake8.with(null_ls_python_virtualenv_tool_config("flake8")),
           null_ls.builtins.diagnostics.pylint.with(null_ls_python_virtualenv_tool_config("pylint")),
+          -- null_ls.builtins.diagnostics.mypy,
+          -- null_ls.builtins.formatting.black,
+          -- null_ls.builtins.formatting.isort,
+          -- null_ls.builtins.diagnostics.flake8,
+          -- null_ls.builtins.diagnostics.pylint,
         },
       })
     end,

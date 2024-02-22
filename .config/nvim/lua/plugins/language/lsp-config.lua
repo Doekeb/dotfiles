@@ -5,8 +5,8 @@ return {
       ensure_installed = {
         "lua_ls",
         -- "ruff_lsp",
-        -- "jedi_language_server",
-        "pyright",
+        "jedi_language_server",
+        -- "pyright",
         -- "pylsp",
         -- "pylyzer",
       },
@@ -21,12 +21,13 @@ return {
       local lspconfig = require("lspconfig")
       lspconfig.lua_ls.setup({ capabilities = capabilities })
       -- lspconfig.ruff_lsp.setup({})
-      -- lspconfig.jedi_language_server.setup({ capabilities = capabilities })
-      lspconfig.pyright.setup({ capabilities = capabilities })
+      lspconfig.jedi_language_server.setup({ capabilities = capabilities })
+      -- lspconfig.pyright.setup({ capabilities = capabilities })
       -- lspconfig.pylsp.setup({ capabilities = capabilities })
       -- lspconfig.pylyzer.setup({ capabilities = capabilities })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover)
+      vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
     end,
   },
 }
