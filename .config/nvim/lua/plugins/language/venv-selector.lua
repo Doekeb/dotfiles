@@ -12,9 +12,9 @@ return {
 	"linux-cultist/venv-selector.nvim",
 	dependencies = { "neovim/nvim-lspconfig", "nvimtools/none-ls.nvim", "nvim-telescope/telescope.nvim" },
 	config = function()
-		local null_ls = require("null-ls")
 		local null_ls_hook = function(venv_path, _)
-			-- Disable python tools so we can re-register them from correct working directory and executable
+			local null_ls = require("null-ls")
+			-- Disable python tools so we can re-register them using correct working directory and executable
 			local python_venv_sources = {}
 			for k, source in ipairs(null_ls.python_sources) do
 				null_ls.disable(source.name)
@@ -27,7 +27,23 @@ return {
 				sources = python_venv_sources,
 			})
 		end
-		require("venv-selector").setup({ name = { "venv", ".venv" }, changed_venv_hooks = { null_ls_hook } })
+
+		local pylsp_hook = function(venv_path, _)
+			local lspconfig = require("lspconfig")
+			lspconfig.pylsp_config = lspconfig.pylsp_config or {}
+			lspconfig.pylsp_config.settings = lspconfig.pylsp_config.settings or {}
+			lspconfig.pylsp_config.settings.pylsp = lspconfig.pylsp_config.settings.pylsp or {}
+			lspconfig.pylsp_config.settings.pylsp.plugins = lspconfig.pylsp_config.settings.pylsp.plugins or {}
+			lspconfig.pylsp_config.settings.pylsp.plugins.jedi = lspconfig.pylsp_config.settings.pylsp.plugins.jedi
+				or {}
+			lspconfig.pylsp_config.settings.pylsp.plugins.jedi.environment = venv_path
+			lspconfig.pylsp.setup(lspconfig.pylsp_config)
+		end
+
+		require("venv-selector").setup({
+			name = { "venv", ".venv" },
+			changed_venv_hooks = { null_ls_hook, pylsp_hook },
+		})
 	end,
 	event = "VeryLazy",
 	keys = {
