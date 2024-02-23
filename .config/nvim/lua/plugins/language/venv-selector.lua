@@ -3,6 +3,7 @@ local null_ls_python_venv_tool_config = function(venv_path, tool_name)
 	local command = venv_path .. "/bin/" .. tool_name
 	if os.rename(command, command) then
 		config.command = command
+		config.name = tool_name .. " (venv)"
 	end
 	return config
 end
@@ -13,19 +14,17 @@ return {
 	config = function()
 		local null_ls = require("null-ls")
 		local null_ls_hook = function(venv_path, _)
-			null_ls.disable("python_tools")
+			-- Disable python tools so we can re-register them from correct working directory and executable
+			local python_venv_sources = {}
+			for k, source in ipairs(null_ls.python_sources) do
+				null_ls.disable(source.name)
+				python_venv_sources[k] = source.with(null_ls_python_venv_tool_config(venv_path, source.name))
+			end
 			null_ls.register({
-				name = "python_venv_tools",
 				cwd = function()
 					vim.fn.getcwd()
 				end,
-				sources = {
-					null_ls.builtins.diagnostics.mypy.with(null_ls_python_venv_tool_config(venv_path, "mypy")),
-					null_ls.builtins.formatting.black.with(null_ls_python_venv_tool_config(venv_path, "black")),
-					null_ls.builtins.formatting.isort.with(null_ls_python_venv_tool_config(venv_path, "isort")),
-					null_ls.builtins.diagnostics.flake8.with(null_ls_python_venv_tool_config(venv_path, "flake8")),
-					null_ls.builtins.diagnostics.pylint.with(null_ls_python_venv_tool_config(venv_path, "pylint")),
-				},
+				sources = python_venv_sources,
 			})
 		end
 		require("venv-selector").setup({ name = { "venv", ".venv" }, changed_venv_hooks = { null_ls_hook } })
