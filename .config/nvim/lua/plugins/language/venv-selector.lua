@@ -21,9 +21,7 @@ return {
 				python_venv_sources[k] = source.with(null_ls_python_venv_tool_config(venv_path, source.name))
 			end
 			null_ls.register({
-				cwd = function()
-					vim.fn.getcwd()
-				end,
+				cwd = vim.fn.getcwd,
 				sources = python_venv_sources,
 			})
 		end

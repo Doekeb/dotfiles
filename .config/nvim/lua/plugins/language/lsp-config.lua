@@ -18,8 +18,26 @@ return {
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({ capabilities = capabilities })
 			-- lspconfig.ruff_lsp.setup({})
-      -- This is so we can use it in virtual environment setup
-			lspconfig.pylsp_config = { capabilities = capabilities }
+			-- This is so we can use it in virtual environment setup
+			lspconfig.pylsp_config = {
+				capabilities = capabilities,
+				settings = {
+					pylsp = {
+						plugins = {
+							autopep8 = { enabled = false },
+							flake8 = { enabled = false },
+							mccabe = { enabled = false },
+							preload = { enabled = false },
+							pycodestyle = { enabled = false },
+							pydocstyle = { enabled = false },
+							pyflakes = { enabled = false },
+							pylint = { enabled = false },
+							rope = { enabled = false },
+							yapf = { enabled = false },
+						},
+					},
+				},
+			}
 			lspconfig.pylsp.setup(lspconfig.pylsp_config)
 
 			-- Make all floating windows have borders
