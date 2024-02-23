@@ -7,11 +7,10 @@ vim.opt.relativenumber = true
 vim.opt.scrolloff = 99999
 
 vim.opt.signcolumn = "yes"
-vim.diagnostic.config({signs=false})
+vim.diagnostic.config({ signs = false })
 -- vim.cmd.set("nnoremap <Space> <NOP>")
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
-
-
--- vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { 0 }, { scope = "line" })
+vim.keymap.set("n", "<leader>|", "<cmd>belowright vnew<cr>")
+vim.keymap.set("n", "<leader>_", "<cmd>belowright new<cr>")
