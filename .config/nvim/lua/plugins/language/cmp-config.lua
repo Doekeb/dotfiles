@@ -3,7 +3,11 @@ return {
 		"ray-x/lsp_signature.nvim",
 		event = "VeryLazy",
 		config = function()
-			require("lsp_signature").setup({ hint_prefix = "", select_signature_key = "<C-n>" })
+			require("lsp_signature").setup({
+				hint_enable = false,
+        hint_prefix = "",
+				select_signature_key = "<C-n>",
+			})
 		end,
 	},
 	{ "hrsh7th/cmp-nvim-lsp" },

@@ -1,5 +1,9 @@
 local null_ls_python_venv_tool_config = function(venv_path, tool_name)
-	local config = {}
+	local config = {
+		cwd = function()
+			return vim.fn.getcwd()
+		end,
+	}
 	local command = venv_path .. "/bin/" .. tool_name
 	if os.rename(command, command) then
 		config.command = command
@@ -21,7 +25,6 @@ return {
 				python_venv_sources[k] = source.with(null_ls_python_venv_tool_config(venv_path, source.name))
 			end
 			null_ls.register({
-				cwd = vim.fn.getcwd,
 				sources = python_venv_sources,
 			})
 		end
