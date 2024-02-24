@@ -1,8 +1,14 @@
 return {
-	-- { "ray-x/lsp_signature.nvim" },
+	{
+		"ray-x/lsp_signature.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("lsp_signature").setup({ hint_prefix = "", select_signature_key = "<C-n>" })
+		end,
+	},
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
+	-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
@@ -34,7 +40,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					{ name = "nvim_lsp_signature_help" },
+					-- { name = "nvim_lsp_signature_help" },
 					{ name = "buffer" },
 				}),
 			})
