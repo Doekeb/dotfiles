@@ -17,6 +17,9 @@ return {
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {}) -- [f]ind [f]iles
 		vim.keymap.set("n", "<leader>fif", builtin.live_grep, {}) -- [f]ind [i]n [f]iles
+		vim.keymap.set("n", "<leader>faf", function()
+			builtin.find_files({ hidden = true, no_ignore = true })
+		end, {}) -- [f]ind [a]ll [f]iles
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {}) -- [f]ind [b]uffers
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {}) -- [f]ind [h]elp
 		vim.keymap.set("n", "<leader>fr", builtin.registers, {}) -- [f]ind [r]egisters
