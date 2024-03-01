@@ -7,7 +7,8 @@ import pandas as pd
 import lib
 
 lib.libfunc(2, 3, 5)
-thingy=2
+thingy = 2
+
 
 def my_function(  # An updated comment which is much much better.
     thingy: int, y: str  # another comment?
