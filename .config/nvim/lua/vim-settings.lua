@@ -5,7 +5,14 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
 
-vim.opt.scrolloff = 99999
+vim.opt.scrolloff = 30
+
+-- This mostly works with scrolloff = 9999, just breaks telescope
+-- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+-- 	callback = function()
+-- 		vim.cmd.normal("zz")
+-- 	end,
+-- })
 
 vim.opt.signcolumn = "yes"
 vim.diagnostic.config({ signs = false })
