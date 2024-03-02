@@ -58,7 +58,11 @@ return {
 			},
 			on_attach = function(client, bufnr)
 				on_attach(client, bufnr)
-				vim.opt_local.colorcolumn = "89"
+				local colorcolumn = "89"
+				for i = 90, 1000 do
+					colorcolumn = colorcolumn .. "," .. i
+				end
+				vim.opt_local.colorcolumn = colorcolumn
 			end,
 		}
 		lspconfig.pylsp.setup(lspconfig.pylsp_config)
