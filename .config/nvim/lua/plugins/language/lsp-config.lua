@@ -40,6 +40,12 @@ return {
 		-- This is so we can use it in virtual environment setup
 		lspconfig.pylsp_config = {
 			capabilities = capabilities,
+			-- cmd = {
+			-- 	"/home/doeke/Projects/python-lsp-server/.venv/bin/pylsp",
+			-- 	"-vv",
+			-- 	"--log-file",
+			-- 	"/home/doeke/my_pylsp_log.txt",
+			-- },
 			settings = {
 				pylsp = {
 					plugins = {
