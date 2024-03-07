@@ -23,12 +23,16 @@ return {
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {}) -- [f]ind [b]uffers
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {}) -- [f]ind [h]elp
 		vim.keymap.set("n", "<leader>fr", builtin.registers, {}) -- [f]ind [r]egisters
-		vim.keymap.set("n", "<leader>fc", builtin.commands, {}) -- [f]ind [c]ommands
+		vim.keymap.set("n", "<leader>fC", builtin.commands, {}) -- [f]ind [C]ommands
+		vim.keymap.set("n", "<leader>fc", builtin.command_history, {}) -- [f]ind [c]ommand history
 		vim.keymap.set("n", "<leader>ft", builtin.builtin, {}) -- [f]ind [t]elescope
+		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {}) -- [f]ind [e]rrors
+		vim.keymap.set("n", "<leader>fs", builtin.search_history, {}) -- [f]ind [s]earch history
 
 		vim.keymap.set("n", "<leader>fgb", builtin.git_branches, {}) -- [f]ind [g]it [b]ranches
 		vim.keymap.set("n", "<leader>fgc", builtin.git_commits, {}) -- [f]ind [g]it [c]ommits
-		vim.keymap.set("n", "<leader>fgs", builtin.git_stash, {}) -- [f]ind [g]it [s]tash
+		vim.keymap.set("n", "<leader>fgS", builtin.git_stash, {}) -- [f]ind [g]it [S]tash
+		vim.keymap.set("n", "<leader>fgs", builtin.git_status, {}) -- [f]ind [g]it [s]tatus
 
 		-- Launch telescope on startup
 		vim.api.nvim_create_autocmd("VimEnter", {
