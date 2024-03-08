@@ -61,6 +61,8 @@ return {
 			name = { "venv", ".venv", "env" }, -- Remove "env" eventually
 			changed_venv_hooks = { null_ls_hook, pylsp_hook },
 		})
+
+		vim.api.nvim_create_autocmd("VimEnter", { command = "VenvSelectCached" })
 	end,
 	event = "VeryLazy",
 	keys = {
