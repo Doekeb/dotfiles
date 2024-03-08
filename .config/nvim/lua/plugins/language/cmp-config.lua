@@ -5,7 +5,7 @@ return {
 		config = function()
 			require("lsp_signature").setup({
 				hint_enable = false,
-        hint_prefix = "",
+				hint_prefix = "",
 				select_signature_key = "<C-n>",
 			})
 		end,
@@ -15,7 +15,14 @@ return {
 	-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		"L3MON4D3/LuaSnip",
+		dependencies = { "saadparwaiz1/cmp_luasnip" },
 		build = "make install_jsregexp",
+		config = function()
+			local cwd = vim.fn.getcwd()
+			require("luasnip.loaders.from_vscode").load({
+				paths = { cwd .. "/.vscode" },
+			})
+		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
@@ -50,5 +57,4 @@ return {
 			})
 		end,
 	},
-	{ "saadparwaiz1/cmp_luasnip" },
 }
