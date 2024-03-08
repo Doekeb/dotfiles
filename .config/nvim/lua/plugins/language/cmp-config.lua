@@ -10,22 +10,31 @@ return {
 			})
 		end,
 	},
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer" },
-	-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = { "saadparwaiz1/cmp_luasnip" },
 		build = "make install_jsregexp",
 		config = function()
+			local ls = require("luasnip")
 			local cwd = vim.fn.getcwd()
 			require("luasnip.loaders.from_vscode").load({
 				paths = { cwd .. "/.vscode" },
 			})
+			vim.keymap.set({ "i", "s" }, "<C-l>", function()
+				ls.jump(1)
+			end, { silent = true })
+			vim.keymap.set({ "i", "s" }, "<C-h>", function()
+				ls.jump(-1)
+			end, { silent = true })
 		end,
 	},
 	{
 		"hrsh7th/nvim-cmp",
+		dependencies = {
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-buffer" },
+			-- { "hrsh7th/cmp-nvim-lsp-signature-help" },
+		},
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
@@ -49,10 +58,10 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
-					-- { name = "nvim_lsp_signature_help" },
+					{ name = "nvim_lsp" },
 					{ name = "buffer" },
+					-- { name = "nvim_lsp_signature_help" },
 				}),
 			})
 		end,
