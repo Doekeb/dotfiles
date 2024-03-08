@@ -11,7 +11,9 @@ return {
 			null_ls.builtins.diagnostics.mypy,
 			null_ls.builtins.diagnostics.pylint,
 		}
-		null_ls.setup({ debug = true })
+		null_ls.setup({
+			-- debug = true,
+		})
 		null_ls.register(null_ls.python_sources)
 	end,
 }

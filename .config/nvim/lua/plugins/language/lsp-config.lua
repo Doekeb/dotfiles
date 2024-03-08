@@ -36,6 +36,7 @@ return {
 		vim.diagnostic.config({ float = { source = true } })
 
 		lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+		lspconfig.biome.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
 
 		-- This is so we can use it in virtual environment setup
 		lspconfig.pylsp_config = {
