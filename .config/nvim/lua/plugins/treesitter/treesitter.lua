@@ -108,7 +108,7 @@ return {
 					enable = true,
 					-- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
 					keymaps = {
-						smart_rename = "grr",
+						smart_rename = "<leader>rn",
 					},
 				},
 			},

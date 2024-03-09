@@ -6,22 +6,16 @@ return {
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
 		local lspconfig = require("lspconfig")
 		local on_attach = function(client, bufnr)
-			local opts = { noremap = true, silent = true, buffer = bufnr }
-
-			opts.desc = "show hover help"
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-			opts.desc = "show [e]rrors"
-			vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
-
-			opts.desc = "[g]o to [D]eclaration"
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-
-			opts.desc = "[g]o to [d]efinition"
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-
-			opts.desc = "[g]o [f]ormat"
-			vim.keymap.set("n", "<leader>gf", require("conform").format, opts)
+			local map = function(mode, lhs, rhs, desc)
+				local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc }
+				vim.keymap.set(mode, lhs, rhs, opts)
+			end
+			map("n", "K", vim.lsp.buf.hover, "show hover help")
+			map("n", "<leader>e", vim.diagnostic.open_float, "show [e]rrors")
+			map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
+			map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+			map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
+			map("n", "<leader>gf", require("conform").format, "[g]o [f]ormat")
 		end
 
 		-- Monkeypatch to make all floating windows have borders
@@ -58,7 +52,12 @@ return {
 						pydocstyle = { enabled = false },
 						pyflakes = { enabled = false },
 						pylint = { enabled = false },
-						rope = { enabled = false },
+						rope_autoimport = {
+							enabled = false,
+							completions = { enabled = false },
+							code_actions = { enabled = false },
+						},
+						rope_completion = { enabled = false },
 						yapf = { enabled = false },
 					},
 				},
