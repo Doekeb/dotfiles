@@ -16,6 +16,7 @@ return {
 			map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
 			map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
 			map("n", "<leader>gf", require("conform").format, "[g]o [f]ormat")
+			map("n", "<leader>rrn", vim.lsp.buf.rename, "[r]eally [r]e[n]ame")
 		end
 
 		-- Monkeypatch to make all floating windows have borders
