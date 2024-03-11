@@ -1,13 +1,35 @@
 return {
-  {
-    "folke/tokyonight.nvim",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("tokyonight-night")
-    end,
-  },
-  {
-    "catppuccin/nvim",
-    priority = 1000,
-  },
+	{
+		"folke/tokyonight.nvim",
+		priority = 1000,
+	},
+	{
+		"catppuccin/nvim",
+		priority = 1000,
+	},
+	{
+		"rebelot/kanagawa.nvim",
+		priority = 1000,
+		config = function()
+			require("kanagawa").setup({
+				overrides = function(colors)
+					return {
+						IlluminatedWordText = { link = "DiffText" },
+						IlluminatedWordRead = { link = "DiffText" },
+						IlluminatedWordWrite = { link = "DiffText" },
+					}
+				end,
+				colors = {
+					theme = {
+						all = {
+							ui = {
+								bg_gutter = "none",
+							},
+						},
+					},
+				},
+			})
+			vim.cmd.colorscheme("kanagawa")
+		end,
+	},
 }
