@@ -6,5 +6,6 @@ return {
 			vim.cmd(":Gvdiffsplit!")
 			vim.cmd(":wincmd J")
 		end, {})
+		vim.keymap.set("n", "<leader>G", "<cmd>G<cr>", { noremap = true, silent = true })
 	end,
 }
