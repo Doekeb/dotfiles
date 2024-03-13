@@ -12,6 +12,13 @@ return {
 			end
 			map("n", "K", vim.lsp.buf.hover, "show hover help")
 			map("n", "<leader>e", vim.diagnostic.open_float, "show [e]rrors")
+			map("n", "<leader>te", function()
+				if vim.diagnostic.is_disabled(bufnr) then
+					vim.diagnostic.enable(bufnr)
+				else
+					vim.diagnostic.disable(bufnr)
+				end
+			end, "[t]oggle [e]rrors")
 			map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
 			map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
 			map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")

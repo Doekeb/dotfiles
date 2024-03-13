@@ -4,6 +4,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("lsp_signature").setup({
+				floating_window_above_cur_line = false,
 				hint_enable = false,
 				hint_prefix = "",
 				select_signature_key = "<C-n>",
