@@ -8,8 +8,16 @@ return {
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			ensure_installed = {
+				"bash",
+				"json",
 				"lua",
+				"gitcommit",
+				"gitignore",
+				"markdown",
 				"python",
+				"toml",
+				"vim",
+				"vimdoc",
 			},
 			ignore_install = {},
 			auto_install = true,
