@@ -1,6 +1,7 @@
-return {
-	"m-demare/hlargs.nvim",
-	config = function()
-		require("hlargs").setup({})
-	end,
-}
+return {}
+-- return {
+-- 	"m-demare/hlargs.nvim",
+-- 	config = function()
+-- 		require("hlargs").setup({})
+-- 	end,
+-- }
