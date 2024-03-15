@@ -22,6 +22,16 @@ dood = dood + 7
 do
 
 
+def my_sweet_ass_function():
+    """Look at how long and fantastically cool this docstring is. It has so many words
+    in it! Some of the words are really long like hunkadorydoodlydimpkus. Others are
+    shorter like a. Well, that's all! Well well well. Here's another damn line. I wasn't
+    expected to write a whole other line like that!
+    """
+
+
+# Here is a comment version of the thing that I was doing above. What's going to happen
+# when
 class dingus:
     def do_something(this):
         return this

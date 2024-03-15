@@ -77,6 +77,7 @@ return {
 					colorcolumn = colorcolumn .. "," .. i
 				end
 				vim.opt_local.colorcolumn = colorcolumn
+				vim.opt_local.textwidth = 88
 			end,
 		}
 		lspconfig.pylsp.setup(lspconfig.pylsp_config)
