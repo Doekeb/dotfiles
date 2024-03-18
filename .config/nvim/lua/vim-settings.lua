@@ -12,6 +12,8 @@ vim.diagnostic.config({ signs = false })
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>|", "<cmd>belowright vnew<cr>")
 vim.keymap.set("n", "<leader>_", "<cmd>belowright new<cr>")
+vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[e", vim.diagnostic.goto_prev)
 
 vim.opt.formatoptions = vim.opt.formatoptions - "t"
 

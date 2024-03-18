@@ -10,6 +10,9 @@ return {
 		telescope.setup({
 			pickers = { colorscheme = { enable_preview = true } },
 			extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown({}) } },
+			defaults = {
+				file_ignore_patterns = { "^docs/", "poetry.lock" },
+			},
 		})
 		telescope.load_extension("ui-select")
 
