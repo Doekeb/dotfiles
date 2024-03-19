@@ -18,10 +18,10 @@ vim.keymap.set("n", "[e", vim.diagnostic.goto_prev)
 vim.opt.formatoptions = vim.opt.formatoptions - "t"
 
 local colorcolumn = function()
-	local cc = "+1"
-	for i = 2, 256 do
-		cc = cc .. ",+" .. i
-	end
-	return cc
+  local cc = "+1"
+  for i = 2, 256 do
+    cc = cc .. ",+" .. i
+  end
+  return cc
 end
 vim.opt.colorcolumn = colorcolumn()
