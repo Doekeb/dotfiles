@@ -15,6 +15,7 @@ return {
         "gitignore",
         "markdown",
         "python",
+        "rust",
         "toml",
         "vim",
         "vimdoc",
