@@ -22,7 +22,9 @@ return {
       map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
       map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
       map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
-      map("n", "<leader>gf", require("conform").format, "[g]o [f]ormat")
+      map("n", "<leader>gf", function()
+        require("conform").format({ lsp_fallback = true })
+      end, "[g]o [f]ormat")
       map("n", "<leader>rrn", vim.lsp.buf.rename, "[r]eally [r]e[n]ame")
     end
 
@@ -37,8 +39,10 @@ return {
     -- Show diagnostic source
     vim.diagnostic.config({ float = { source = true } })
 
-    lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+    lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
     lspconfig.biome.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
+    lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+    lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 
     -- This is so we can use it in virtual environment setup
     lspconfig.pylsp_config = {
