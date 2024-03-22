@@ -43,7 +43,7 @@ return {
     vim.g.slime_bracketed_paste = 1
     vim.g.slime_no_mappings = 1
     vim.keymap.set("n", "<leader>sn", slime_new, {})
-    vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSend", {})
+    vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
     vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
   end,
