@@ -72,6 +72,7 @@ return {
             ["]m"] = "@function.outer",
             ["]]"] = { query = { "@class.outer", "@function.outer" } },
             [")"] = "@statement.outer",
+            ["]}"] = "@class.outer",
             --
             -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
             -- ["]o"] = "@loop.*",
@@ -85,15 +86,18 @@ return {
           goto_next_end = {
             ["]M"] = "@function.outer",
             ["]["] = { query = { "@class.outer", "@function.outer" } },
+            ["]{"] = "@class.outer",
           },
           goto_previous_start = {
             ["[m"] = "@function.outer",
             ["[["] = { query = { "@class.outer", "@function.outer" } },
             ["("] = "@statement.outer",
+            ["[{"] = "@class.outer",
           },
           goto_previous_end = {
             ["[M"] = "@function.outer",
             ["[]"] = { query = { "@class.outer", "@function.outer" } },
+            ["[}"] = "@class.outer",
           },
           -- Below will go to either the start or the end, whichever is closer.
           -- Use if you want more granular movements

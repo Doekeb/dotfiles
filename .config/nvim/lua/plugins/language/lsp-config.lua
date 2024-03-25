@@ -20,7 +20,7 @@ return {
         end
       end, "[t]oggle [e]rrors")
       map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
-      map("n", "gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
+      map("n", "gd", require("telescope.builtin").lsp_definitions, "[g]o to [d]efinition")
       map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
       map("n", "<leader>gf", function()
         require("conform").format({ lsp_fallback = true })
