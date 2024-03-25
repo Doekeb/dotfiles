@@ -42,6 +42,7 @@ return {
     lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
     lspconfig.biome.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
     lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
+    -- lspconfig.ruff_lsp.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
     lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 
     -- This is so we can use it in virtual environment setup

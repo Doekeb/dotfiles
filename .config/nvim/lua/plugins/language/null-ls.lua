@@ -15,5 +15,13 @@ return {
       -- debug = true,
     })
     null_ls.register(null_ls.python_sources)
+
+    vim.api.nvim_create_user_command("NullLsStop", function(input)
+      null_ls.disable(input.args)
+    end, { desc = "disable null-ls source", nargs = "?" })
+
+    vim.api.nvim_create_user_command("NullLsStart", function(input)
+      null_ls.enable(input.args)
+    end, { desc = "disable null-ls source", nargs = "?" })
   end,
 }
