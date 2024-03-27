@@ -22,7 +22,7 @@ dood = dood + 7
 do
 
 
-def my_sweet_ass_function():
+def my_sweet_ass_function(blah="hello"):
     """Look at how long and fantastically cool this docstring is. It has so many words
     in it! Some of the words are really long like hunkadorydoodlydimpkus. Others arein it! Some of the words are really long like hunkadorydoodlydimpkus. Others arein it! Some of the words are really long like hunkadorydoodlydimpkus. Others arein it! Some of the words are really long like hunkadorydoodlydimpkus. Others arein it! Some of the words are really long like hunkadorydoodlydimpkus. Others are
     shorter like a. Well, that's all! Well well well. Here's another damn line. I wasn't

@@ -17,6 +17,7 @@ return {
             IlluminatedWordText = { link = "DiffText" },
             IlluminatedWordRead = { link = "DiffText" },
             IlluminatedWordWrite = { link = "DiffText" },
+            ["@string.documentation"] = { fg = colors.theme.vcs.added },
           }
         end,
         colors = {
