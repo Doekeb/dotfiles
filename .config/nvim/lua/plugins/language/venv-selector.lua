@@ -38,13 +38,8 @@ return {
 
     local pylsp_hook = function(venv_path, _)
       local lspconfig = require("lspconfig")
-      lspconfig.pylsp_config = lspconfig.pylsp_config or {}
-      lspconfig.pylsp_config.settings = lspconfig.pylsp_config.settings or {}
-      lspconfig.pylsp_config.settings.pylsp = lspconfig.pylsp_config.settings.pylsp or {}
-      lspconfig.pylsp_config.settings.pylsp.plugins = lspconfig.pylsp_config.settings.pylsp.plugins or {}
-
-      lspconfig.pylsp_config.settings.pylsp.plugins.jedi = lspconfig.pylsp_config.settings.pylsp.plugins.jedi or {}
-      lspconfig.pylsp_config.settings.pylsp.plugins.jedi.environment = venv_path
+      local pylsp_config = { settings = { pylsp = { plugins = { jedi = { environment = venv_path } } } } }
+      lspconfig.pylsp_config = vim.tbl_deep_extend("force", lspconfig.pylsp_config or {}, pylsp_config)
 
       -- local flake8_path = venv_tool_path(venv_path, "flake8")
       -- if flake8_path then
