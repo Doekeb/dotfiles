@@ -4,7 +4,16 @@ return {
   opts = {
     options = { theme = "auto" },
     sections = {
-      lualine_c = {
+      lualine_b = {
+        function()
+          return require("venv-selector").get_active_venv():gsub(vim.fn.getcwd(), "."):gsub(vim.fn.getenv("HOME"), "~")
+            or "no virtual environment"
+        end,
+      },
+      lualine_c = { "filetype" },
+      lualine_x = { "diagnostics" },
+      lualine_y = { "diff", "branch" },
+      lualine_z = {
         {
           "filename",
           path = 1,
@@ -15,11 +24,6 @@ return {
             newfile = "[New]", -- Text to show for newly created file before first write
           },
         },
-      },
-      lualine_y = {
-        function()
-          return require("venv-selector").get_active_venv() or "no virtual environment"
-        end,
       },
     },
   },
