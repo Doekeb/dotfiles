@@ -45,41 +45,43 @@ return {
     -- lspconfig.ruff_lsp.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
     lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
 
+    lspconfig.basedpyright.setup({ capabilities = capabilities, on_attach = on_attach })
+
     -- This is so we can use it in virtual environment setup
-    lspconfig.pylsp_config = {
-      capabilities = capabilities,
-      cmd = {
-        "/home/doeke/Projects/python-lsp-server/.venv/bin/pylsp",
-        "-vv",
-        "--log-file",
-        "/home/doeke/my_pylsp_log.txt",
-      },
-      settings = {
-        pylsp = {
-          plugins = {
-            autopep8 = { enabled = false },
-            flake8 = { enabled = false },
-            mccabe = { enabled = false },
-            preload = { enabled = false },
-            pycodestyle = { enabled = false },
-            pydocstyle = { enabled = false },
-            pyflakes = { enabled = false },
-            pylint = { enabled = false },
-            rope_autoimport = {
-              enabled = false,
-              completions = { enabled = false },
-              code_actions = { enabled = false },
-            },
-            rope_completion = { enabled = false },
-            yapf = { enabled = false },
-          },
-        },
-      },
-      on_attach = function(client, bufnr)
-        vim.opt_local.textwidth = 88
-        on_attach(client, bufnr)
-      end,
-    }
-    lspconfig.pylsp.setup(lspconfig.pylsp_config)
+    -- lspconfig.pylsp_config = {
+    --   capabilities = capabilities,
+    --   cmd = {
+    --     "/home/doeke/Projects/python-lsp-server/.venv/bin/pylsp",
+    --     "-vv",
+    --     "--log-file",
+    --     "/home/doeke/my_pylsp_log.txt",
+    --   },
+    --   settings = {
+    --     pylsp = {
+    --       plugins = {
+    --         autopep8 = { enabled = false },
+    --         flake8 = { enabled = false },
+    --         mccabe = { enabled = false },
+    --         preload = { enabled = false },
+    --         pycodestyle = { enabled = false },
+    --         pydocstyle = { enabled = false },
+    --         pyflakes = { enabled = false },
+    --         pylint = { enabled = false },
+    --         rope_autoimport = {
+    --           enabled = false,
+    --           completions = { enabled = false },
+    --           code_actions = { enabled = false },
+    --         },
+    --         rope_completion = { enabled = false },
+    --         yapf = { enabled = false },
+    --       },
+    --     },
+    --   },
+    --   on_attach = function(client, bufnr)
+    --     vim.opt_local.textwidth = 88
+    --     on_attach(client, bufnr)
+    --   end,
+    -- }
+    -- lspconfig.pylsp.setup(lspconfig.pylsp_config)
   end,
 }

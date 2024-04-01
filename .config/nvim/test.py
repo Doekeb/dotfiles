@@ -1,11 +1,14 @@
 import datetime as dt
 import json
 import typing
+from datetime import datetime
 
 import pandas as doody
+import pandas as pd
 from numpy import array
 from pandas import DataFrame
 
+datetime(2023, 1, 1)
 import lib
 
 array([1, 2, 3])
@@ -56,6 +59,7 @@ class Dingus:
 
 print(Dingus)
 print(Dingus(2, 3).my_excellent_property)
+print(dingus)
 
 
 def bingus():
@@ -66,20 +70,23 @@ print(dingus.do_something)
 
 
 @typing.overload
-def ThingyDing(x: int) -> int:
-    """Do a thing."""
+def ThingyDing(x: int) -> int: ...
 
 
 @typing.overload
-def ThingyDing(x: str) -> str:
-    """Do somethin different"""
+def ThingyDing(x: str) -> str: ...
 
 
-# def ThingyDing(x: str | int) -> str | int:
-#     return x + x
+def ThingyDing(x: str | int) -> str | int:
+    """Do extra special stuff."""
+    return x + x
 
 
-ThingyDing
+ThingyDing(x=2)
+
+pd.DataFrame(
+    [1, 2, 3],
+)
 
 
 def my_function(  # An updated comment which is much much better.
