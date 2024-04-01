@@ -4,6 +4,7 @@ vim.opt.shiftwidth = 2
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
+vim.g.python3_host_prog = "/usr/bin/python"
 
 vim.opt.signcolumn = "yes"
 vim.diagnostic.config({ signs = false })
