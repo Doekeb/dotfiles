@@ -55,8 +55,8 @@ return {
       name = { "venv", ".venv", "env" }, -- Remove "env" eventually
       changed_venv_hooks = {
         null_ls_hook,
-        pylsp_hook,
-        -- require("venv-selector").hooks.basedpyright,
+        -- pylsp_hook,
+        require("venv-selector").hooks.basedpyright,
         -- require("venv-selector").hooks.pyright,
       },
     })
