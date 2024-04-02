@@ -47,7 +47,10 @@ return {
 
     lspconfig.basedpyright.setup({
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = function()
+        vim.opt_local.textwidth = 88
+        on_attach()
+      end,
       settings = {
         basedpyright = {
           typeCheckingMode = "off",
