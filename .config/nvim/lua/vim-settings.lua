@@ -26,3 +26,5 @@ local colorcolumn = function()
   return cc
 end
 vim.opt.colorcolumn = colorcolumn()
+
+vim.filetype.add({ filename = { [".flake8"] = "dosini" } })
