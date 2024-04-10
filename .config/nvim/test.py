@@ -22,6 +22,10 @@ dood = 2
 dood = dood + 7
 
 
+def my_fun(x: int) -> str:
+    return x
+
+
 do
 
 
