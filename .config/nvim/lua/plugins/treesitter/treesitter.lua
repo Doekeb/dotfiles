@@ -17,6 +17,7 @@ return {
         "markdown",
         "python",
         "rust",
+        "sql",
         "toml",
         "vim",
         "vimdoc",

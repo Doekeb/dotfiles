@@ -7,6 +7,7 @@ return {
       json = { "biome" },
       lua = { "stylua" },
       python = { "isort", "black" },
+      sql = { "sql_formatter" },
       typescript = { "biome" },
       typescriptreact = { "biome" },
     },
