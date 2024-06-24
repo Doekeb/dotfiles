@@ -1,9 +1,9 @@
 return {
-  "iamcco/markdown-preview.nvim",
-  cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-  build = "cd app && yarn install",
-  init = function()
-    vim.g.mkdp_filetypes = { "markdown" }
+  "MeanderingProgrammer/markdown.nvim",
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
+  config = function()
+    local rm = require("render-markdown")
+    rm.setup({})
+    vim.keymap.set("n", "<leader>tm", rm.toggle)
   end,
-  ft = { "markdown" },
 }
