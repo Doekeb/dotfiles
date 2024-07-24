@@ -36,6 +36,10 @@ return {
       end
     end
 
+    lint.linters.mypy.args = vim.tbl_filter(function(x)
+      return x ~= "--hide-error-codes"
+    end, lint.linters.mypy.args)
+
     lint.linters.venv_pylint = venv_linter(lint.linters.pylint)
     lint.linters.venv_mypy = venv_linter(lint.linters.mypy)
     lint.linters.venv_flake8 = venv_linter(lint.linters.flake8)
