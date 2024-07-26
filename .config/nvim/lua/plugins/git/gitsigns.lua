@@ -1,7 +1,14 @@
 return {
   "lewis6991/gitsigns.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "seanbreckenridge/gitsigns-yadm.nvim", opts = { shell_timeout_ms = 1000 } },
+  },
   config = function()
     require("gitsigns").setup({
+      _on_attach_pre = function(_, callback)
+        require("gitsigns-yadm").yadm_signs(callback)
+      end,
       numhl = true,
       current_line_blame_opts = { delay = 0 },
       yadm = { enable = true },
@@ -66,6 +73,7 @@ return {
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+        map({ "o", "x" }, "ah", ":<C-U>Gitsigns select_hunk<CR>")
       end,
     })
   end,
