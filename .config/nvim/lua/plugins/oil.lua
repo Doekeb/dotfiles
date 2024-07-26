@@ -37,6 +37,6 @@ return {
       --   end
       -- end),
     })
-    vim.keymap.set("n", "<leader>fo", oil.open_float, { noremap = true })
+    vim.keymap.set("n", "<C-n>", oil.toggle_float, { noremap = true })
   end,
 }
