@@ -43,9 +43,16 @@ return {
     lint.linters.venv_pylint = venv_linter(lint.linters.pylint)
     lint.linters.venv_mypy = venv_linter(lint.linters.mypy)
     lint.linters.venv_flake8 = venv_linter(lint.linters.flake8)
+    lint.linters.sqlfluff.args = {
+      "lint",
+      "--format=json",
+      -- note: users will have to replace the --dialect argument accordingly
+      "--dialect=postgres",
+    }
 
     lint.linters_by_ft = {
       python = { "venv_pylint", "venv_mypy", "venv_flake8" },
+      sql = { "sqlfluff" },
     }
     vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost" }, {
       callback = function()

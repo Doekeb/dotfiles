@@ -8,13 +8,20 @@ vim.g.python3_host_prog = "/usr/bin/python"
 
 vim.opt.signcolumn = "yes"
 vim.diagnostic.config({ signs = false })
+vim.g.mapleader = " "
 -- vim.cmd.set("nnoremap <Space> <NOP>")
 
-vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>|", "<cmd>belowright vnew<cr>")
-vim.keymap.set("n", "<leader>_", "<cmd>belowright new<cr>")
-vim.keymap.set("n", "]e", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[e", vim.diagnostic.goto_prev)
+local map = require("utils").set_global_keymap
+
+map("n", "<leader>|", "<cmd>belowright vnew<cr>", "split vertical")
+map("n", "<leader>_", "<cmd>belowright new<cr>", "split horizontal")
+
+map("n", "<leader>e", vim.diagnostic.open_float, "show [e]rrors")
+map("n", "]e", vim.diagnostic.goto_next, "go to next [e]rror")
+map("n", "[e", vim.diagnostic.goto_prev, "go to previous [e]rror")
+map("n", "<leader>te", function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+end, "[t]oggle [e]rrors")
 
 vim.opt.formatoptions = vim.opt.formatoptions - "t"
 

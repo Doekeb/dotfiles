@@ -2,12 +2,6 @@ return {
   "stevearc/conform.nvim",
   config = function()
     local conform = require("conform")
-    conform.formatters.sql_formatter = {
-      prepend_args = {
-        "-c",
-        '{"language": "postgresql", "dialect": "postgresql", "tabWidth": 2, "useTabs": false, "keywordCase": "lower", "dataTypeCase": "lower", "functionCase": "lower", "logicalOperatorNewline": "before", "linesBetweenQueries": 1, "denseOperators": false, "newlineBeforeSemicolon": false}',
-      },
-    }
     conform.setup({
       formatters_by_ft = {
         javascript = { "biome" },
@@ -15,11 +9,15 @@ return {
         json = { "biome" },
         lua = { "stylua" },
         python = { "isort", "black" },
-        sql = { "sql_formatter" },
+        sql = { "sqlfluff" },
         typescript = { "biome" },
         typescriptreact = { "biome" },
       },
       format_on_save = { lsp_fallback = true },
     })
+    local map = require("utils").set_global_keymap
+    map("n", "<leader>gf", function()
+      conform.format({ lsp_fallback = true })
+    end, "[g]o [f]ormat")
   end,
 }
