@@ -2,6 +2,7 @@ return {
   "stevearc/conform.nvim",
   config = function()
     local conform = require("conform")
+    conform.formatters.sqlfluff = { args = { "fix", "-" } }
     conform.setup({
       formatters_by_ft = {
         javascript = { "biome" },
