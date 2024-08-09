@@ -28,7 +28,6 @@ return {
     vim.api.nvim_create_autocmd("User", {
       pattern = "OilEnter",
       callback = function()
-        vim.print("here")
         oil.open_preview()
       end,
       -- callback = vim.schedule_wrap(function(args)
