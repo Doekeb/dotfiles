@@ -35,3 +35,4 @@ end
 vim.opt.colorcolumn = colorcolumn()
 
 vim.filetype.add({ filename = { [".flake8"] = "dosini" } })
+vim.filetype.add({ filename = { [".sqlfluff"] = "cfg" } })
