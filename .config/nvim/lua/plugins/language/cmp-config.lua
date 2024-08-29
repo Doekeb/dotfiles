@@ -35,6 +35,7 @@ return {
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-buffer" },
       { "saadparwaiz1/cmp_luasnip" },
+      { "kristijanhusak/vim-dadbod-completion" },
     },
     config = function()
       local cmp = require("cmp")
@@ -63,6 +64,7 @@ return {
           { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "luasnip" },
+          { name = "vim-dadbod-completion" },
         }),
       })
     end,
