@@ -15,6 +15,10 @@ local map = require("utils").set_global_keymap
 
 map("n", "<leader>|", "<cmd>belowright vnew<cr>", "split vertical")
 map("n", "<leader>_", "<cmd>belowright new<cr>", "split horizontal")
+map("n", "<A-h>", "<cmd>wincmd H<cr>", "split horizontal")
+map("n", "<A-j>", "<cmd>wincmd J<cr>", "split horizontal")
+map("n", "<A-k>", "<cmd>wincmd K<cr>", "split horizontal")
+map("n", "<A-l>", "<cmd>wincmd L<cr>", "split horizontal")
 
 map("n", "<leader>e", vim.diagnostic.open_float, "show [e]rrors")
 map("n", "]e", vim.diagnostic.goto_next, "go to next [e]rror")
