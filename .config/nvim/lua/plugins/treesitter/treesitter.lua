@@ -32,9 +32,9 @@ return {
         enable = true,
         keymaps = {
           init_selection = false,
-          node_incremental = "<leader>m",
+          node_incremental = "<C-]>",
           scope_incremental = "<leader>M",
-          node_decremental = "<leader>l",
+          node_decremental = "<C-[>",
         },
       },
       textobjects = {
