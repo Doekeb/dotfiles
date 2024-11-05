@@ -31,10 +31,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = false,
-          node_incremental = "<C-]>",
-          scope_incremental = "<leader>M",
-          node_decremental = "<C-[>",
+          init_selection = "<A-]>",
+          node_incremental = "<A-]>",
+          scope_incremental = "<A-}>",
+          node_decremental = "<A-[>",
         },
       },
       textobjects = {
