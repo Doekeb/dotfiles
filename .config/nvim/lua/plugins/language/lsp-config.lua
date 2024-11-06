@@ -30,6 +30,7 @@ return {
     lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })
     -- lspconfig.ruff_lsp.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
     lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
+    lspconfig.vimls.setup({ capabilities = capabilities, on_attach = on_attach })
 
     lspconfig.basedpyright.setup({
       capabilities = capabilities,
