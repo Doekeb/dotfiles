@@ -1,8 +1,14 @@
 return {
-  "kristijanhusak/vim-dadbod-ui",
+  -- "kristijanhusak/vim-dadbod-ui",
+  "doekeb/vim-dadbod-ui",
+  -- dir = "/home/doeke/Projects/vim-dadbod-ui",
   dependencies = {
-    { "tpope/vim-dadbod", lazy = true },
-    { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    -- { "tpope/vim-dadbod", lazy = true },
+    { "doekeb/vim-dadbod", lazy = true },
+    -- { dir = "/home/doeke/Projects/vim-dadbod", lazy = true },
+    -- { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    { "doekeb/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
+    -- { dir = "/home/doeke/Projects/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
   },
   cmd = {
     "DBUI",
