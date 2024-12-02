@@ -2,7 +2,7 @@ return {
   "lewis6991/gitsigns.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    { "seanbreckenridge/gitsigns-yadm.nvim", opts = { shell_timeout_ms = 1000 } },
+    { "purarue/gitsigns-yadm.nvim", opts = { shell_timeout_ms = 1000 } },
   },
   config = function()
     require("gitsigns").setup({
@@ -11,7 +11,6 @@ return {
       end,
       numhl = true,
       current_line_blame_opts = { delay = 0 },
-      yadm = { enable = true },
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
