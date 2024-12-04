@@ -19,7 +19,7 @@ return {
     local venv_linter = function(linter)
       return function()
         local linter_config = vim.deepcopy(type(linter) == "table" and linter or linter())
-        local active_venv = require("venv-selector").get_active_venv()
+        local active_venv = require("venv-selector").venv()
         local cmd = active_venv and venv_tool_path(active_venv, linter.cmd) or nil
 
         if cmd then
