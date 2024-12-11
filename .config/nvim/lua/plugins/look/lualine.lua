@@ -1,19 +1,22 @@
+local function regexEscape(str)
+  local result = str:gsub("[%(%)%.%%%+%-%*%?%[%^%$%]]", "%%%1")
+  return result
+end
+
+local function replace(str, this, that)
+  local t = that:gsub("%%", "%%%%") -- only % needs to be escaped for 'that'
+  local result = str:gsub(regexEscape(this), t)
+  return result
+end
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons", "linux-cultist/venv-selector.nvim" },
   opts = {
     options = { theme = "auto" },
     sections = {
+      lualine_a = { "mode" },
       lualine_b = {
-        function()
-          return require("venv-selector").get_active_venv():gsub(vim.fn.getcwd(), "."):gsub(vim.fn.getenv("HOME"), "~")
-            or "no virtual environment"
-        end,
-      },
-      lualine_c = { "filetype" },
-      lualine_x = { "diagnostics" },
-      lualine_y = { "diff", "branch" },
-      lualine_z = {
         {
           "filename",
           path = 1,
@@ -25,6 +28,16 @@ return {
           },
         },
       },
+      lualine_x = {
+        "diagnostics",
+        function()
+          return replace(replace(require("venv-selector").venv(), vim.fn.getcwd(), "."), vim.fn.getenv("HOME"), "~")
+            or "no virtual environment"
+        end,
+      },
+      lualine_c = { "filetype" },
+      lualine_y = { "diff", "branch" },
+      lualine_z = { "location" },
     },
   },
 }
