@@ -11,7 +11,6 @@ return {
         javascriptreact = { "biome" },
         json = { "biome" },
         lua = { "stylua" },
-        python = { "isort", "black" },
         sql = { "sqlfluff" },
         typescript = { "biome" },
         typescriptreact = { "biome" },

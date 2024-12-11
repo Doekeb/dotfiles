@@ -30,11 +30,17 @@ end
 
 return {
   "linux-cultist/venv-selector.nvim",
-  dependencies = { "neovim/nvim-lspconfig", "mfussenegger/nvim-lint", "nvim-telescope/telescope.nvim" },
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-lint",
+    "stevearc/conform.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
   lazy = false,
   branch = "regexp",
   config = function()
     local lint = require("lint")
+    local conform = require("conform")
     local venv_selector = require("venv-selector")
 
     local on_venv_activate = function()
@@ -60,6 +66,18 @@ return {
 
       lint.linters_by_ft.python = python_linters
       lint.try_lint()
+
+      local python_formatters = {}
+      for _, base_name in ipairs({ "isort", "black" }) do
+        local venv_formatter = venv_tool_path(active_venv, base_name)
+        if venv_formatter then
+          conform.formatters[base_name] = { command = venv_formatter }
+          vim.list_extend(python_formatters, { base_name })
+        end
+      end
+      if #python_formatters > 0 then
+        conform.formatters_by_ft.python = python_formatters
+      end
     end
 
     venv_selector.setup({

@@ -56,6 +56,11 @@ return {
         },
       },
     })
+    lspconfig.ruff.setup({
+      on_attach = function(client, bufnr)
+        client.server_capabilities.hoverProvider = false
+      end,
+    })
     -- lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
 
     -- This is so we can use it in virtual environment setup
