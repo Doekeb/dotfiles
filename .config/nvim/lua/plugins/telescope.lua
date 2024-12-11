@@ -4,12 +4,13 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
     local telescope = require("telescope")
     telescope.setup({
       pickers = { colorscheme = { enable_preview = true } },
-      extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown({}) } },
+      extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown({}) }, fzf = {} },
       defaults = {
         file_ignore_patterns = { "^docs/", "poetry.lock" },
       },
