@@ -1,48 +1,69 @@
 return {
   "jpalardy/vim-slime",
   name = "slime",
+  dependencies = { "linux-cultist/venv-selector.nvim" },
   config = function()
-    local slime_new = function()
-      local cmd = "tmux split-window -hdPF '#{pane_id}'"
-      local new_pane_id = vim.fn.systemlist(cmd)
+    local venv_selector = require("venv-selector")
+
+    local slime_new = function(where)
+      local cmd = "tmux split-window -" .. where .. "dPF '#{pane_id}'"
+      local result = vim.fn.systemlist(cmd)
 
       -- Extract the pane ID from the output
-      if new_pane_id and #new_pane_id > 0 then
-        new_pane_id = new_pane_id[1]
-        print("New pane ID: " .. new_pane_id)
-      else
-        print("Failed to get new pane ID")
+      local new_pane_id
+      if result and #result > 0 then
+        new_pane_id = result[1]
       end
 
-      local bootstrap_cmd = "tmux send-keys -t " .. new_pane_id .. " 'poetry run ipython' ENTER"
-      vim.fn.system(bootstrap_cmd)
-
-      -- print("hello!")
-      -- Execute Tmux command to split the current window horizontally
-      -- vim.fn.system("tmux split-window -vP")
-
-      -- Execute Tmux command to get the ID of the newly created pane
-      -- local pane_id = vim.fn.system("tmux display-message -p '#{pane_id}'")
-      -- local pane_id = vim.fn.system("tmux split-window -vdPF '#{pane_id}'")
-      -- Remove trailing newline character from the output
-      -- pane_id = pane_id:gsub("%s+", "")
-      -- print(pane_id)
-      -- Now you have the pane_id, you can react to it as needed
-      -- print("New pane created with ID: " .. pane_id)
-      -- vim.api.nvim_command(
-      --   'let g:slime_default_config = {"socket_name": "default", "target_pane": "' .. blah .. '"}'
-      -- )
-      print(new_pane_id)
       vim.g.slime_default_config = { socket_name = "default", target_pane = new_pane_id }
       vim.b.slime_config = { socket_name = "default", target_pane = new_pane_id }
+      return new_pane_id
     end
-    -- local slime = require("slime")
-    vim.api.nvim_create_user_command("SlimeNew", slime_new, {})
+
+    local slime_start_python = function(pane_id)
+      local active_venv = venv_selector.venv()
+      local p
+      if active_venv then
+        local activate = { "source", venv_selector.venv_tool_path(active_venv, "activate") }
+        local cmd = { "tmux", "send-keys", "-t", pane_id, "'" .. table.concat(activate, " ") .. "'", "ENTER" }
+        vim.fn.system(table.concat(cmd, " "))
+        p = venv_selector.venv_tool_path(active_venv, "ipython") and "'ipython'" or "'python'"
+      else
+        p = (vim.fn.executable("ipython") == 1) and "'ipython'" or "'python'"
+      end
+      local cmd = { "tmux", "send-keys", "-t", pane_id, p, "ENTER" }
+      vim.fn.system(table.concat(cmd, " "))
+    end
+
+    vim.api.nvim_create_user_command("SlimeNew", function()
+      slime_new("h")
+    end, {})
     vim.g.slime_dont_ask_default = 1
     vim.g.slime_target = "tmux"
     vim.g.slime_bracketed_paste = 1
     vim.g.slime_no_mappings = 1
-    vim.keymap.set("n", "<leader>sn", slime_new, {})
+    vim.keymap.set("n", "<leader>snn", function()
+      slime_new("h")
+    end, {})
+    vim.keymap.set("n", "<leader>sn|", function()
+      slime_new("h")
+    end, {})
+    vim.keymap.set("n", "<leader>sn_", function()
+      slime_new("v")
+    end, {})
+    vim.keymap.set("n", "<leader>spp", function()
+      local pane_id = slime_new("h")
+      slime_start_python(pane_id)
+    end, {})
+    vim.keymap.set("n", "<leader>sp|", function()
+      local pane_id = slime_new("h")
+      slime_start_python(pane_id)
+    end, {})
+    vim.keymap.set("n", "<leader>sp_", function()
+      local pane_id = slime_new("v")
+      slime_start_python(pane_id)
+    end, {})
+    vim.keymap.set("n", "<leader>sc", "<Plug>SlimeConfig", { remap = true })
     vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
     vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })

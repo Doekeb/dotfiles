@@ -42,6 +42,7 @@ return {
     local lint = require("lint")
     local conform = require("conform")
     local venv_selector = require("venv-selector")
+    venv_selector.venv_tool_path = venv_tool_path
 
     local on_venv_activate = function()
       local active_venv = venv_selector.venv()
