@@ -4,10 +4,13 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
+    "aznhe21/actions-preview.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
     local telescope = require("telescope")
+    local actions_preview = require("actions-preview")
+
     telescope.setup({
       pickers = { colorscheme = { enable_preview = true } },
       extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown({}) }, fzf = {} },
@@ -16,6 +19,8 @@ return {
       },
     })
     telescope.load_extension("ui-select")
+
+    actions_preview.setup({ telescope = require("telescope.themes").get_ivy({}) })
 
     local builtin = require("telescope.builtin")
 
@@ -27,12 +32,13 @@ return {
     vim.keymap.set("n", "<leader>fb", builtin.buffers, {}) -- [f]ind [b]uffers
     vim.keymap.set("n", "<leader>fh", builtin.help_tags, {}) -- [f]ind [h]elp
     vim.keymap.set("n", "<leader>fr", builtin.registers, {}) -- [f]ind [r]egisters
-    vim.keymap.set("n", "<leader>fC", builtin.commands, {}) -- [f]ind [C]ommands
-    vim.keymap.set("n", "<leader>fc", builtin.command_history, {}) -- [f]ind [c]ommand history
+    vim.keymap.set("n", "<leader>fcc", builtin.commands, {}) -- [f]ind [c]ommands [c]
+    vim.keymap.set("n", "<leader>fch", builtin.command_history, {}) -- [f]ind [c]ommand [h]istory
     vim.keymap.set("n", "<leader>ft", builtin.builtin, {}) -- [f]ind [t]elescope
     vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {}) -- [f]ind [e]rrors
     vim.keymap.set("n", "<leader>fs", builtin.search_history, {}) -- [f]ind [s]earch history
     vim.keymap.set("n", "<leader>fj", builtin.jumplist, {}) -- [f]ind [j]umps
+    vim.keymap.set("n", "<leader>fca", actions_preview.code_actions, {}) -- [f]ind [c]ode [a]ctions
 
     vim.keymap.set("n", "<leader>fgb", builtin.git_branches, {}) -- [f]ind [g]it [b]ranches
     vim.keymap.set("n", "<leader>fgc", builtin.git_commits, {}) -- [f]ind [g]it [c]ommits
