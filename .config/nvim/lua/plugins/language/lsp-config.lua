@@ -18,7 +18,6 @@ return {
     local lspconfig = require("lspconfig")
     local on_attach = function(client, bufnr)
       local map = require("utils").set_local_keymap
-      map("n", "K", vim.lsp.buf.hover, "show hover help")
       map("n", "gD", vim.lsp.buf.declaration, "[g]o to [D]eclaration")
       map("n", "gd", require("telescope.builtin").lsp_definitions, "[g]o to [d]efinition")
       map("n", "gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
