@@ -27,13 +27,16 @@ return {
         "#{?#{&&:#{==:#{pane_at_left},#{pane_at_right}},#{==:#{pane_at_top},#{pane_at_bottom}}},󰧞,}", -- Check middle
       }
       local format = {
+        table.concat(arrows),
+        "#{pane_current_command}",
         "Session: #{session_name}",
         "Window: #{window_index} #{window_name}",
         "Pane: #{pane_index}",
-        "#{pane_current_command}",
-        table.concat(arrows),
       }
-      local data = { "#{pane_id}", string.format("#{!=:#{session_id},%s}#{!=:#{window_id},%s}", session_id, window_id) }
+      local data = {
+        "#{pane_id}",
+        -- string.format("#{!=:#{session_id},%s}#{!=:#{window_id},%s}", session_id, window_id),
+      }
       local cmd = { "tmux", "list-panes", "-aF", table.concat(data, " ") .. " " .. table.concat(format, " | ") }
       local results = vim.fn.systemlist(cmd)
 
@@ -43,12 +46,11 @@ return {
           finder = finders.new_table({
             results = results,
             entry_maker = function(entry)
-              local value, rest = entry:match("^(%S+)%s+(.+)")
-              local ordinal, display = rest:match("^(%S+)%s+(.+)")
+              local value, display = entry:match("^(%S+)%s+(.+)")
               return {
                 value = value,
                 display = display,
-                ordinal = ordinal,
+                ordinal = entry,
               }
             end,
           }),
