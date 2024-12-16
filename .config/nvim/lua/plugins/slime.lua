@@ -8,35 +8,60 @@ return {
     local conf = require("telescope.config").values
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
+    local previewers = require("telescope.previewers")
 
     local tmux_pane_picker = function(opts)
       opts = opts or {}
       local session_id, window_id =
         vim.fn.systemlist({ "tmux", "display-message", "-p", "#{session_id} #{window_id}" })[1]:match("^(%S+)%s+(.+)")
       local arrows = {
-        "#{?#{&&:#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}},#{==:#{pane_at_left},#{pane_at_right}}},󰁞,}", -- Check top
-        "#{?#{&&:#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}},#{==:#{pane_at_left},#{pane_at_right}}},󰁆,}", -- Check bottom
-        "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{==:#{pane_at_top},#{pane_at_bottom}}},󰁎,}", -- Check left
-        "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{==:#{pane_at_top},#{pane_at_bottom}}},󰁕,}", -- Check right
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}},#{==:#{pane_at_left},#{pane_at_right}}},#{?#{==:#{window_id},%s},󰁞,󰧇},}",
+          window_id
+        ), -- Check top
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}},#{==:#{pane_at_left},#{pane_at_right}}},#{?#{==:#{window_id},%s},󰁆,󰦿},}",
+          window_id
+        ), -- Check bottom
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{==:#{pane_at_top},#{pane_at_bottom}}},#{?#{==:#{window_id},%s},󰁎,󰧀},}",
+          window_id
+        ), -- Check left
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{==:#{pane_at_top},#{pane_at_bottom}}},#{?#{==:#{window_id},%s},󰁕,󰧂},}",
+          window_id
+        ), -- Check right
 
-        "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}}},󰧄,}", -- Check top-left
-        "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}}},󰧆,}", -- Check top-right
-        "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}}},󰦸,}", -- Check bottom-left
-        "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}}},󰦺,}", -- Check bottom-right
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}}},#{?#{==:#{window_id},%s},󰧄,󰧃},}",
+          window_id
+        ), -- Check top-left
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{&&:#{pane_at_top},#{!=:#{pane_at_bottom},1}}},#{?#{==:#{window_id},%s},󰧆,󰧅},}",
+          window_id
+        ), -- Check top-right
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_left},#{!=:#{pane_at_right},1}},#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}}},#{?#{==:#{window_id},%s},󰦸,󰦷},}",
+          window_id
+        ), -- Check bottom-left
+        string.format(
+          "#{?#{&&:#{&&:#{pane_at_right},#{!=:#{pane_at_left},1}},#{&&:#{pane_at_bottom},#{!=:#{pane_at_top},1}}},#{?#{==:#{window_id},%s},󰦺,󰦹},}",
+          window_id
+        ), -- Check bottom-right
 
-        "#{?#{&&:#{==:#{pane_at_left},#{pane_at_right}},#{==:#{pane_at_top},#{pane_at_bottom}}},󰧞,}", -- Check middle
+        string.format(
+          "#{?#{&&:#{==:#{pane_at_left},#{pane_at_right}},#{==:#{pane_at_top},#{pane_at_bottom}}},#{?#{==:#{window_id},%s},,},}",
+          window_id
+        ), -- Check middle
       }
       local format = {
         table.concat(arrows),
         "#{pane_current_command}",
         "Session: #{session_name}",
-        "Window: #{window_index} #{window_name}",
+        "Window: #{window_index}",
         "Pane: #{pane_index}",
       }
-      local data = {
-        "#{pane_id}",
-        -- string.format("#{!=:#{session_id},%s}#{!=:#{window_id},%s}", session_id, window_id),
-      }
+      local data = { "#{pane_id}" }
       local cmd = { "tmux", "list-panes", "-aF", table.concat(data, " ") .. " " .. table.concat(format, " | ") }
       local results = vim.fn.systemlist(cmd)
 
@@ -64,6 +89,11 @@ return {
             end)
             return true
           end,
+          previewer = previewers.new_termopen_previewer({
+            get_command = function(entry, status)
+              return { "tmux", "capture-pane", "-pe", "-t", entry.value }
+            end,
+          }),
         })
         :find()
     end
@@ -128,10 +158,10 @@ return {
       local pane_id = slime_new("v")
       slime_start_python(pane_id)
     end, {})
-    -- tmux_pane(require("telescope.themes").get_dropdown({}))
-    vim.keymap.set("n", "<leader>sc", function()
-      tmux_pane_picker(require("telescope.themes").get_dropdown({}))
-    end, { remap = true })
+    vim.keymap.set("n", "<leader>sc", tmux_pane_picker, { remap = true })
+    -- vim.keymap.set("n", "<leader>sc", function()
+    --   tmux_pane_picker(require("telescope.themes").get_dropdown({}))
+    -- end, { remap = true })
     vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
     vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
