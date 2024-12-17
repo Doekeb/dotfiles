@@ -138,6 +138,8 @@ return {
     vim.g.slime_target = "tmux"
     vim.g.slime_bracketed_paste = 1
     vim.g.slime_no_mappings = 1
+
+    -- New slime pane mappings
     vim.keymap.set("n", "<leader>snn", function()
       slime_new("h")
     end, {})
@@ -159,11 +161,21 @@ return {
       local pane_id = slime_new("v")
       slime_start_python(pane_id)
     end, {})
+
+    -- Slime config mappings
     vim.keymap.set("n", "<leader>sc", function()
       tmux_pane_picker(themes.get_dropdown())
     end, { remap = true })
+
+    -- Slime send mappings
     vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
-    vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
+    -- vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
+    vim.keymap.set("n", "<leader>ss", function()
+      local keys = vim.api.nvim_replace_termcodes("^<Plug>SlimeMotionSendasvas<esc>", true, true, true)
+      if not pcall(vim.cmd.normal, keys) then
+        tmux_pane_picker(themes.get_dropdown())
+      end
+    end, { remap = true })
   end,
 }
