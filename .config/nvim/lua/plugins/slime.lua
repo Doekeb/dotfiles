@@ -170,12 +170,12 @@ return {
     -- Slime send mappings
     vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
-    -- vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
-    vim.keymap.set("n", "<leader>ss", function()
-      local keys = vim.api.nvim_replace_termcodes("^<Plug>SlimeMotionSendasvas<esc>", true, true, true)
-      if not pcall(vim.cmd.normal, keys) then
-        tmux_pane_picker(themes.get_dropdown())
-      end
-    end, { remap = true })
+    vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
+    -- vim.keymap.set("n", "<leader>ss", function()
+    --   local keys = vim.api.nvim_replace_termcodes("^<Plug>SlimeMotionSendasvas<esc>", true, true, true)
+    --   if not pcall(vim.cmd.normal, keys) then
+    --     tmux_pane_picker(themes.get_dropdown())
+    --   end
+    -- end, { remap = true })
   end,
 }
