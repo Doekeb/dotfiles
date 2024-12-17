@@ -91,7 +91,7 @@ return {
           end,
           previewer = previewers.new_termopen_previewer({
             get_command = function(entry, status)
-              return { "tmux", "capture-pane", "-pe", "-t", entry.value }
+              return "setterm -linewrap off; tmux capture-pane -pe -t " .. entry.value
             end,
           }),
         })
