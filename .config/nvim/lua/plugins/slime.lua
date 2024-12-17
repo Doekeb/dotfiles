@@ -9,6 +9,7 @@ return {
     local actions = require("telescope.actions")
     local action_state = require("telescope.actions.state")
     local previewers = require("telescope.previewers")
+    local themes = require("telescope.themes")
 
     local tmux_pane_picker = function(opts)
       opts = opts or {}
@@ -158,10 +159,9 @@ return {
       local pane_id = slime_new("v")
       slime_start_python(pane_id)
     end, {})
-    vim.keymap.set("n", "<leader>sc", tmux_pane_picker, { remap = true })
-    -- vim.keymap.set("n", "<leader>sc", function()
-    --   tmux_pane_picker(require("telescope.themes").get_dropdown({}))
-    -- end, { remap = true })
+    vim.keymap.set("n", "<leader>sc", function()
+      tmux_pane_picker(themes.get_dropdown())
+    end, { remap = true })
     vim.keymap.set("x", "<leader>s", "<Plug>SlimeRegionSendgv<esc>)", { remap = true })
     vim.keymap.set("n", "<leader>s", "<Plug>SlimeMotionSend", {})
     vim.keymap.set("n", "<leader>ss", "^<Plug>SlimeMotionSendasvas<esc>)", { remap = true })
