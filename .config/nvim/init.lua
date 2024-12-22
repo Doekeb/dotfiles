@@ -15,9 +15,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  { import = "plugins.look" },
-  { import = "plugins.treesitter" },
-  { import = "plugins.language" },
-  { import = "plugins.git" },
-  { import = "plugins" },
+  spec = {
+    { import = "plugins.look" },
+    { import = "plugins.treesitter" },
+    { import = "plugins.language" },
+    { import = "plugins.git" },
+    { import = "plugins" },
+  },
+  ui = { border = "rounded", backdrop = 100 },
 })
