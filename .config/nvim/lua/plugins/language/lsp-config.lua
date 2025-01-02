@@ -43,8 +43,16 @@ return {
     lspconfig.taplo.setup({ capabilities = capabilities, on_attach = on_attach })
     lspconfig.vimls.setup({ capabilities = capabilities, on_attach = on_attach })
 
+    -- markdown makes weird escape codes, so use plaintext
     lspconfig.basedpyright.setup({
-      capabilities = capabilities,
+      capabilities = vim.tbl_deep_extend("force", capabilities, {
+        textDocument = {
+          hover = {
+            contentFormat = { "plaintext" },
+          },
+          completion = { completionItem = { documentationFormat = { "plaintext" } } },
+        },
+      }),
       on_attach = function()
         vim.opt_local.textwidth = 88
         on_attach()
