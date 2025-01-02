@@ -44,6 +44,8 @@ return {
     lspconfig.vimls.setup({ capabilities = capabilities, on_attach = on_attach })
 
     -- markdown makes weird escape codes, so use plaintext
+    -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#markupContent
+    -- Search above page for "MarkupKind"
     lspconfig.basedpyright.setup({
       capabilities = vim.tbl_deep_extend("force", capabilities, {
         textDocument = {
@@ -51,6 +53,7 @@ return {
             contentFormat = { "plaintext" },
           },
           completion = { completionItem = { documentationFormat = { "plaintext" } } },
+          signatureHelp = { signatureInformation = { documentationFormat = { "plaintext" } } },
         },
       }),
       on_attach = function()
