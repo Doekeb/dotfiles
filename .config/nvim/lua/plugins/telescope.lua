@@ -10,17 +10,23 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions_preview = require("actions-preview")
+    local themes = require("telescope.themes")
 
     telescope.setup({
-      pickers = { colorscheme = { enable_preview = true } },
-      extensions = { ["ui-select"] = { require("telescope.themes").get_dropdown({}) }, fzf = {} },
+      pickers = {
+        colorscheme = { enable_preview = true },
+        registers = { theme = "cursor" },
+        commands = { theme = "ivy" },
+        command_history = { theme = "ivy" },
+      },
+      extensions = { ["ui-select"] = { themes.get_dropdown({}) }, fzf = {} },
       defaults = {
         file_ignore_patterns = { "^docs/", "poetry.lock" },
       },
     })
     telescope.load_extension("ui-select")
 
-    actions_preview.setup({ telescope = require("telescope.themes").get_ivy({}) })
+    actions_preview.setup({ telescope = themes.get_ivy({}) })
 
     local builtin = require("telescope.builtin")
 
