@@ -35,7 +35,7 @@ return {
         -- winhighlight = 'Normal:BlinkCmpMenu,FloatBorder:BlinkCmpMenuBorder,CursorLine:BlinkCmpMenuSelection,Search:None',
         winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
       },
-      list = { selection = "manual" },
+      list = { selection = { preselect = true, auto_insert = false } },
       ghost_text = { enabled = true },
       documentation = {
         auto_show = true,
