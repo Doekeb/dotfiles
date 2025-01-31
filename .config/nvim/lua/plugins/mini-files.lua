@@ -3,7 +3,10 @@ return {
   version = false,
   config = function()
     local mini_files = require("mini.files")
-    mini_files.setup({ mappings = { go_in = "<C-l>", go_out = "<C-h>" }, windows = { preview = true } })
+    mini_files.setup({
+      mappings = { go_in = "<C-l>", go_out = "<C-h>", go_in_plus = "<CR>" },
+      windows = { preview = true },
+    })
     vim.keymap.set("n", "-", function(...)
       if not mini_files.close() then
         mini_files.open(...)
