@@ -37,6 +37,5 @@ return {
       -- end),
     })
     vim.keymap.set("n", "<C-n>", oil.toggle_float, { noremap = true })
-    vim.keymap.set("n", "<esc>", oil.close, { noremap = true })
   end,
 }
