@@ -119,6 +119,11 @@ return {
     local slime_start_python = function(pane_id)
       local active_venv = venv_selector.venv()
       local p
+      if os.rename(".env", ".env") then
+        local source_dotenv = { "source", ".env" }
+        local cmd = { "tmux", "send-keys", "-t", pane_id, "'" .. table.concat(source_dotenv, " ") .. "'", "ENTER" }
+        vim.fn.system(table.concat(cmd, " "))
+      end
       if active_venv then
         local activate = { "source", venv_selector.venv_tool_path(active_venv, "activate") }
         local cmd = { "tmux", "send-keys", "-t", pane_id, "'" .. table.concat(activate, " ") .. "'", "ENTER" }
