@@ -4,7 +4,7 @@ return {
   config = function()
     local mini_files = require("mini.files")
     mini_files.setup({
-      mappings = { go_in = "<C-l>", go_out = "<C-h>", go_in_plus = "<CR>" },
+      mappings = { close = "<Esc>", go_in = "<C-l>", go_out = "<C-h>", go_in_plus = "<CR>" },
       windows = { preview = true },
     })
     vim.keymap.set("n", "-", function(...)
