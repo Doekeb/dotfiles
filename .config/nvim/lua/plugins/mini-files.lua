@@ -12,5 +12,10 @@ return {
         mini_files.open(...)
       end
     end, { noremap = true })
+    vim.keymap.set("n", "_", function(...)
+      if not mini_files.close() then
+        mini_files.open(vim.api.nvim_buf_get_name(0), ...)
+      end
+    end, { noremap = true })
   end,
 }
