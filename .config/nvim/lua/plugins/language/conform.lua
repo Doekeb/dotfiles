@@ -16,11 +16,7 @@ return {
         typescriptreact = { "biome" },
         ["*"] = { "injected" },
       },
-      format_on_save = { lsp_fallback = true, timeout_ms = 2000 },
+      format_on_save = { lsp_format = "first", timeout_ms = 2000 },
     })
-    local map = require("utils").set_global_keymap
-    map("n", "<leader>gf", function()
-      conform.format({ lsp_fallback = true })
-    end, "[g]o [f]ormat")
   end,
 }
