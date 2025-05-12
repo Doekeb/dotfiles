@@ -33,9 +33,6 @@ return {
       return _open_floating_preview(contents, syntax, opts, ...)
     end
 
-    -- Show diagnostic source
-    vim.diagnostic.config({ float = { source = true } })
-
     lspconfig.bashls.setup({ capabilities = capabilities, on_attach = on_attach })
     lspconfig.biome.setup({ capabilities = capabilities, on_attach = on_attach, single_file_support = true })
     lspconfig.lua_ls.setup({ capabilities = capabilities, on_attach = on_attach })

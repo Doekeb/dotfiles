@@ -7,7 +7,7 @@ vim.opt.wrap = false
 vim.g.python3_host_prog = "/usr/bin/python"
 
 vim.opt.signcolumn = "yes"
-vim.diagnostic.config({ signs = false })
+vim.diagnostic.config({ virtual_text = true, signs = false, severity_sort = true, float = { source = true } })
 vim.g.mapleader = " "
 -- vim.cmd.set("nnoremap <Space> <NOP>")
 
@@ -17,8 +17,12 @@ map("n", "<leader>|", "<cmd>belowright vnew<cr>", "split vertical")
 map("n", "<leader>_", "<cmd>belowright new<cr>", "split horizontal")
 
 map("n", "<leader>e", vim.diagnostic.open_float, "show [e]rrors")
-map("n", "]e", vim.diagnostic.goto_next, "go to next [e]rror")
-map("n", "[e", vim.diagnostic.goto_prev, "go to previous [e]rror")
+map("n", "]e", function()
+  vim.diagnostic.jump({ count = 1, float = true })
+end, "go to next [e]rror")
+map("n", "[e", function()
+  vim.diagnostic.jump({ count = -1, float = true })
+end, "go to previous [e]rror")
 map("n", "<leader>te", function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 end, "[t]oggle [e]rrors")
