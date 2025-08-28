@@ -11,6 +11,13 @@ return {
     local telescope = require("telescope")
     local actions_preview = require("actions-preview")
     local themes = require("telescope.themes")
+    local diffview = require("diffview")
+
+    local diffview_open = function(prompt_bufnr)
+      local entry = require("telescope.actions.state").get_selected_entry()
+      require("telescope.actions").close(prompt_bufnr)
+      diffview.open({ entry.value })
+    end
 
     telescope.setup({
       pickers = {
@@ -18,6 +25,8 @@ return {
         registers = { theme = "cursor" },
         commands = { theme = "ivy" },
         command_history = { theme = "ivy" },
+        git_branches = { mappings = { n = { ["do"] = diffview_open } } },
+        git_commits = { mappings = { n = { ["do"] = diffview_open } } },
       },
       extensions = { ["ui-select"] = { themes.get_dropdown({}) }, fzf = {} },
       defaults = {
