@@ -23,6 +23,7 @@ return {
     vim.g.db_ui_win_position = "right"
     vim.g.db_ui_execute_on_save = 0
 
+    vim.keymap.set("n", "<leader>db", ":tabnew<CR>:DBUI<CR>", { noremap = true, silent = true })
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "sql",
       callback = function()
