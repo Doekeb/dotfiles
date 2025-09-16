@@ -22,6 +22,8 @@ return {
     -- elsewhere in your config, without redefining it, via `opts_extend`
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      per_filetype = { sql = { "snippets", "dadbod", "buffer" } },
+      providers = { dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" } },
       -- optionally disable cmdline completions
       -- cmdline = {},
     },
