@@ -7,7 +7,7 @@ return {
     local tools = {}
     vim.list_extend(
       tools,
-      { "basedpyright", "bashls", "biome", "lua_ls", "pylsp", "pyright", "ruff", "taplo", "ty", "vimls" }
+      { "basedpyright", "bashls", "biome", "lua_ls", "pylsp", "pyright", "ruff", "taplo", "ty", "vimls", "vtsls" }
     ) -- lsp tools
     vim.list_extend(tools, { "flake8", "mypy", "pylint", "sqlfluff" }) -- nvim-lint tools
     vim.list_extend(tools, { "biome", "black", "isort", "sqlfluff", "stylua" }) -- conform tools

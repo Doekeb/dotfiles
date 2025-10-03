@@ -41,6 +41,7 @@ return {
     lspconfig.ty.setup({ capabilities = capabilities, on_attach = on_attach })
     vim.lsp.enable("ty")
     lspconfig.vimls.setup({ capabilities = capabilities, on_attach = on_attach })
+    lspconfig.vtsls.setup({ capabilities = capabilities, on_attach = on_attach })
 
     -- markdown makes weird escape codes, so use plaintext
     -- https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#markupContent

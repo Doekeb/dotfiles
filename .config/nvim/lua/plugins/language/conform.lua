@@ -16,7 +16,7 @@ return {
         typescriptreact = { "biome" },
         ["*"] = { "injected" },
       },
-      format_on_save = { lsp_format = "first", timeout_ms = 2000 },
+      format_on_save = { lsp_format = "first", timeout_ms = 4000 },
     })
   end,
 }
