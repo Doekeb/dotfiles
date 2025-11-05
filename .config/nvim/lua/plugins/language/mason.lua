@@ -2,7 +2,7 @@ return {
   "WhoIsSethDaniel/mason-tool-installer.nvim",
   dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
   config = function()
-    require("mason").setup({ registries = { "file:~/Projects/mason-registry" } })
+    require("mason").setup({})
     require("mason-lspconfig").setup({ automatic_enable = false })
     local tools = {}
     vim.list_extend(
