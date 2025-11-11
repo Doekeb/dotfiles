@@ -34,7 +34,7 @@ return {
     "neovim/nvim-lspconfig",
     "mfussenegger/nvim-lint",
     "stevearc/conform.nvim",
-    "nvim-telescope/telescope.nvim",
+    "folke/snacks.nvim",
   },
   lazy = false,
   branch = "regexp",
@@ -85,6 +85,8 @@ return {
       settings = {
         options = {
           on_venv_activate_callback = on_venv_activate,
+          picker_options = { snacks = { layout = { preset = "select_r" } } },
+          picker = "snacks",
         },
       },
     })
