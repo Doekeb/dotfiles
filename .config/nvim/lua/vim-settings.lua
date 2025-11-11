@@ -9,6 +9,7 @@ vim.g.python3_host_prog = "/usr/bin/python"
 vim.opt.signcolumn = "yes"
 vim.diagnostic.config({ virtual_text = true, signs = false, severity_sort = true, float = { source = true } })
 vim.g.mapleader = " "
+vim.opt.winborder = "rounded"
 -- vim.cmd.set("nnoremap <Space> <NOP>")
 
 local map = require("utils").set_global_keymap
