@@ -4,12 +4,10 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
-    "aznhe21/actions-preview.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   config = function()
     local telescope = require("telescope")
-    local actions_preview = require("actions-preview")
     local themes = require("telescope.themes")
     local diffview = require("diffview")
 
@@ -35,8 +33,6 @@ return {
     })
     telescope.load_extension("ui-select")
 
-    actions_preview.setup({ telescope = themes.get_ivy({}) })
-
     local builtin = require("telescope.builtin")
 
     vim.keymap.set("n", "<leader>ff", builtin.find_files, {}) -- [f]ind [f]iles
@@ -53,7 +49,6 @@ return {
     vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {}) -- [f]ind [e]rrors
     vim.keymap.set("n", "<leader>fs", builtin.search_history, {}) -- [f]ind [s]earch history
     vim.keymap.set("n", "<leader>fj", builtin.jumplist, {}) -- [f]ind [j]umps
-    vim.keymap.set("n", "<leader>fca", actions_preview.code_actions, {}) -- [f]ind [c]ode [a]ctions
 
     vim.keymap.set("n", "<leader>fgb", builtin.git_branches, {}) -- [f]ind [g]it [b]ranches
     vim.keymap.set("n", "<leader>fgc", builtin.git_commits, {}) -- [f]ind [g]it [c]ommits
