@@ -52,11 +52,9 @@ return {
           end, "[g][O] to document symbols")
         end
         if client:supports_method("workspace/symbol") then
-          map(
-            "go",
-            snacks.picker.lsp_workspace_symbols({ layout = { preset = "telescope_r" } }),
-            "[g][o] to workspace symbols"
-          )
+          map("go", function()
+            snacks.picker.lsp_workspace_symbols({ layout = { preset = "telescope_r" } })
+          end, "[g][o] to workspace symbols")
         end
       end,
     })
