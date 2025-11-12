@@ -9,16 +9,6 @@ tbl_deep_copy = function(t)
   end
   return res
 end
-local hack_sort = function(x, y)
-  local indexes = { preview = 0, list = 1, input = 2 }
-  if x.win == "input" then
-    x.border = "top"
-  end
-  if y.win == "input" then
-    y.border = "top"
-  end
-  return indexes[x.win] < indexes[y.win]
-end
 
 return {
   -- "folke/snacks.nvim",
@@ -28,16 +18,17 @@ return {
   lazy = false,
   config = function()
     local layouts = require("snacks.picker.config.layouts")
+
     local select_r = tbl_deep_copy(layouts.select)
     select_r["reverse"] = true
-    table.sort(select_r.layout, hack_sort)
+    select_r.layout[1], select_r.layout[2] = select_r.layout[2], select_r.layout[1]
+    select_r.layout[2].border = "top"
+
     local dropdown_r = tbl_deep_copy(layouts.dropdown)
     dropdown_r["reverse"] = true
-    for _, v in ipairs(dropdown_r.layout) do
-      if v.box then
-        table.sort(v, hack_sort)
-      end
-    end
+    dropdown_r.layout[2][1], dropdown_r.layout[2][2] = dropdown_r.layout[2][2], dropdown_r.layout[2][1]
+    dropdown_r.layout[2][2].border = "top"
+
     require("snacks").setup({
       picker = {
         enabled = true,
