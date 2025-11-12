@@ -29,12 +29,22 @@ return {
     dropdown_r.layout[2][1], dropdown_r.layout[2][2] = dropdown_r.layout[2][2], dropdown_r.layout[2][1]
     dropdown_r.layout[2][2].border = "top"
 
+    local sidebar_r = tbl_deep_copy(layouts.sidebar)
+    sidebar_r["reverse"] = true
+    sidebar_r.layout[1], sidebar_r.layout[2] = sidebar_r.layout[2], sidebar_r.layout[1]
+
+    local left_r = { preset = "sidebar_r" }
+    local right_r = { preset = "sidebar_r", layout = { position = "right" } }
+
     require("snacks").setup({
       picker = {
         enabled = true,
         layouts = {
           select_r = select_r,
           dropdown_r = dropdown_r,
+          sidebar_r = sidebar_r,
+          left_r = left_r,
+          right_r = right_r,
         },
         layout = function()
           return vim.o.columns >= 120 and { preset = "telescope" } or { preset = "dropdown_r" }
