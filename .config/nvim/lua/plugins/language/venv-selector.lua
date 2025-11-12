@@ -37,7 +37,6 @@ return {
     "folke/snacks.nvim",
   },
   lazy = false,
-  branch = "regexp",
   config = function()
     local lint = require("lint")
     local conform = require("conform")
