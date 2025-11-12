@@ -1,83 +1,54 @@
+local tbl_deep_copy
+tbl_deep_copy = function(t)
+  if type(t) ~= "table" then
+    return t
+  end
+  local res = {}
+  for k, v in pairs(t) do
+    res[k] = tbl_deep_copy(v)
+  end
+  return res
+end
+local hack_sort = function(x, y)
+  local indexes = { preview = 0, list = 1, input = 2 }
+  if x.win == "input" then
+    x.border = "top"
+  end
+  if y.win == "input" then
+    y.border = "top"
+  end
+  return indexes[x.win] < indexes[y.win]
+end
+
 return {
-  "folke/snacks.nvim",
+  -- "folke/snacks.nvim",
+  "doekeb/snacks.nvim",
+  -- dir = "/home/doeke/Projects/snacks.nvim",
   priority = 1000,
   lazy = false,
-  opts = {
-    picker = {
-      enabled = true,
-      layouts = {
-        dropdown_r = {
-          reverse = true,
-          layout = {
-            backdrop = false,
-            row = 1,
-            width = 0.4,
-            min_width = 80,
-            height = 0.8,
-            border = "none",
-            box = "vertical",
-            { win = "preview", title = "{preview}", height = 0.4, border = true },
-            {
-              box = "vertical",
-              border = true,
-              title = "{title} {live} {flags}",
-              title_pos = "center",
-              { win = "list" },
-              { win = "input", height = 1, border = "top" },
-            },
-          },
+  config = function()
+    local layouts = require("snacks.picker.config.layouts")
+    local select_r = tbl_deep_copy(layouts.select)
+    select_r["reverse"] = true
+    table.sort(select_r.layout, hack_sort)
+    local dropdown_r = tbl_deep_copy(layouts.dropdown)
+    dropdown_r["reverse"] = true
+    for _, v in ipairs(dropdown_r.layout) do
+      if v.box then
+        table.sort(v, hack_sort)
+      end
+    end
+    require("snacks").setup({
+      picker = {
+        enabled = true,
+        layouts = {
+          select_r = select_r,
+          dropdown_r = dropdown_r,
         },
-        select_r = {
-          hidden = { "preview" },
-          reverse = true,
-          layout = {
-            backdrop = false,
-            width = 0.5,
-            min_width = 80,
-            max_width = 100,
-            height = 0.4,
-            min_height = 2,
-            box = "vertical",
-            border = true,
-            title = "{title}",
-            title_pos = "center",
-            { win = "preview", title = "{preview}", height = 0.4, border = "top" },
-            { win = "list", border = "none" },
-            { win = "input", height = 1, border = "top" },
-          },
-        },
-        telescope_r = {
-          reverse = false,
-          layout = {
-            box = "horizontal",
-            backdrop = false,
-            width = 0.8,
-            height = 0.9,
-            border = "none",
-            {
-              box = "vertical",
-              { win = "list", title = " Results ", title_pos = "center", border = true },
-              {
-                win = "input",
-                height = 1,
-                border = true,
-                title = "{title} {live} {flags}",
-                title_pos = "center",
-              },
-            },
-            {
-              win = "preview",
-              title = "{preview:Preview}",
-              width = 0.45,
-              border = true,
-              title_pos = "center",
-            },
-          },
-        },
+        layout = function()
+          return vim.o.columns >= 120 and { preset = "telescope" } or { preset = "dropdown_r" }
+        end,
       },
-      layout = function()
-        return vim.o.columns >= 120 and { preset = "telescope" } or { preset = "dropdown_r" }
-      end,
-    },
-  },
+    })
+  end,
 }
