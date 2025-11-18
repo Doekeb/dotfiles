@@ -49,6 +49,24 @@ return {
         layout = function()
           return vim.o.columns >= 120 and { preset = "telescope" } or { preset = "dropdown_r" }
         end,
+        win = {
+          input = {
+            keys = {
+              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<c-f>"] = { "preview_scroll_right", mode = { "i", "n" } },
+              ["<c-b>"] = { "preview_scroll_left", mode = { "i", "n" } },
+            },
+          },
+          list = {
+            keys = {
+              ["<c-d>"] = "preview_scroll_down",
+              ["<c-u>"] = "preview_scroll_up",
+              ["<c-f>"] = "preview_scroll_right",
+              ["<c-b>"] = "preview_scroll_left",
+            },
+          },
+        },
       },
     })
   end,
