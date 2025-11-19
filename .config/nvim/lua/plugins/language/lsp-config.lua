@@ -22,7 +22,11 @@ return {
   config = function()
     local snacks = require("snacks")
     local actions_preview = require("actions-preview")
-    actions_preview.setup({ backend = { "snacks" }, snacks = { layout = { preset = "ivy" } } })
+    actions_preview.setup({
+      highlight_command = { require("actions-preview.highlight").delta() },
+      backend = { "snacks" },
+      snacks = { layout = { preset = "ivy" } },
+    })
     vim.api.nvim_create_autocmd("LspAttach", {
       -- group = vim.api.nvim_create_augroup("my.lsp", {}),
       callback = function(args)
@@ -47,14 +51,10 @@ return {
           map("grt", snacks.picker.lsp_type_definitions, "[g]o to [r] [t]ype definitions")
         end
         if client:supports_method("textDocument/documentSymbol") then
-          map("gO", function()
-            snacks.picker.lsp_symbols({ layout = { preset = "telescope_r" } })
-          end, "[g][O] to document symbols")
+          map("gO", snacks.picker.lsp_symbols, "[g][O] to document symbols")
         end
         if client:supports_method("workspace/symbol") then
-          map("go", function()
-            snacks.picker.lsp_workspace_symbols({ layout = { preset = "telescope_r" } })
-          end, "[g][o] to workspace symbols")
+          map("go", snacks.picker.lsp_workspace_symbols, "[g][o] to workspace symbols")
         end
       end,
     })
