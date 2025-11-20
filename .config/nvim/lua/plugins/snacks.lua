@@ -72,6 +72,7 @@ return {
           command_history = { layout = { preset = "ivy_r_no_preview" } },
           diagnostics = { layout = { preset = "ivy_r" } },
           diagnostics_buffer = { layout = { preset = "ivy_r" } },
+          files = { hidden = true },
           git_branches = { all = true },
           registers = { layout = { preset = "ivy_r" } },
           search_history = { layout = { preset = "ivy_r_no_preview" } },
@@ -98,11 +99,11 @@ return {
     })
     vim.keymap.set("n", "<leader>ff", snacks.picker.files, { desc = "[f]ind [f]iles" })
     vim.keymap.set("n", "<leader>fF", function()
-      snacks.picker.files({ hidden = true, ignored = true, follow = true })
+      snacks.picker.files({ ignored = true, follow = true })
     end, { desc = "[f]ind all [F]iles" })
     vim.keymap.set("n", "<leader>fif", snacks.picker.grep, { desc = "[f]ind [i]n [f]iles" })
     vim.keymap.set("n", "<leader>fiF", function()
-      snacks.picker.grep({ hidden = true, ignored = true, follow = true })
+      snacks.picker.grep({ ignored = true, follow = true })
     end, { desc = "[f]ind [i]n all [F]iles" })
     vim.keymap.set("n", "<leader>fb", snacks.picker.buffers, { desc = "[f]ind [b]uffers" })
     vim.keymap.set("n", "<leader>fib", snacks.picker.grep_buffers, { desc = "[f]ind [i]n [b]uffers" })
