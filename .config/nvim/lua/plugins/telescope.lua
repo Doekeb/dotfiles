@@ -50,7 +50,7 @@ return {
     -- vim.keymap.set("n", "<leader>fs", builtin.search_history, {}) -- [f]ind [s]earch history
     -- vim.keymap.set("n", "<leader>fj", builtin.jumplist, {}) -- [f]ind [j]umps
 
-    vim.keymap.set("n", "<leader>fgb", builtin.git_branches, {}) -- [f]ind [g]it [b]ranches
+    -- vim.keymap.set("n", "<leader>fgb", builtin.git_branches, {}) -- [f]ind [g]it [b]ranches
     -- vim.keymap.set("n", "<leader>fgc", builtin.git_commits, {}) -- [f]ind [g]it [c]ommits
     -- vim.keymap.set("n", "<leader>fgS", builtin.git_stash, {}) -- [f]ind [g]it [S]tash
     -- vim.keymap.set("n", "<leader>fgs", builtin.git_status, {}) -- [f]ind [g]it [s]tatus

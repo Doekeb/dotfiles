@@ -80,16 +80,16 @@ return {
         win = {
           input = {
             keys = {
-              ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
-              ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<c-p>"] = { "preview_scroll_up", mode = { "i", "n" } },
+              ["<c-n>"] = { "preview_scroll_down", mode = { "i", "n" } },
               ["<c-f>"] = { "preview_scroll_right", mode = { "i", "n" } },
               ["<c-b>"] = { "preview_scroll_left", mode = { "i", "n" } },
             },
           },
           list = {
             keys = {
-              ["<c-d>"] = "preview_scroll_down",
-              ["<c-u>"] = "preview_scroll_up",
+              ["<c-p>"] = "preview_scroll_up",
+              ["<c-n>"] = "preview_scroll_down",
               ["<c-f>"] = "preview_scroll_right",
               ["<c-b>"] = "preview_scroll_left",
             },
@@ -118,6 +118,7 @@ return {
     vim.keymap.set("n", "<leader>fp", snacks.picker.projects, { desc = "[f]ind [p]rojects" })
     vim.keymap.set("n", "<leader>fu", snacks.picker.undo, { desc = "[f]ind [u]ndo tree" })
 
+    vim.keymap.set("n", "<leader>fgb", snacks.picker.git_branches, { desc = "[f]ind [g]it [b]ranches" })
     vim.keymap.set("n", "<leader>fgc", snacks.picker.git_log, { desc = "[f]ind [g]it [c]ommits" })
     vim.keymap.set("n", "<leader>fgf", snacks.picker.git_log_file, { desc = "[f]ind [g]it [f]ile commits" })
     vim.keymap.set("n", "<leader>fgl", snacks.picker.git_log_line, { desc = "[f]ind [g]it [l]ine commits" })
