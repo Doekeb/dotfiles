@@ -45,7 +45,7 @@ return {
     -- vim.keymap.set("n", "<leader>fr", builtin.registers, {}) -- [f]ind [r]egisters
     -- vim.keymap.set("n", "<leader>fcc", builtin.commands, {}) -- [f]ind [c]ommands [c]
     -- vim.keymap.set("n", "<leader>fch", builtin.command_history, {}) -- [f]ind [c]ommand [h]istory
-    vim.keymap.set("n", "<leader>ft", builtin.builtin, {}) -- [f]ind [t]elescope
+    -- vim.keymap.set("n", "<leader>ft", builtin.builtin, {}) -- [f]ind [t]elescope
     -- vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {}) -- [f]ind [e]rrors
     -- vim.keymap.set("n", "<leader>fs", builtin.search_history, {}) -- [f]ind [s]earch history
     -- vim.keymap.set("n", "<leader>fj", builtin.jumplist, {}) -- [f]ind [j]umps
