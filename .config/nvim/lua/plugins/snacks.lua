@@ -19,6 +19,7 @@ return {
   config = function()
     local snacks = require("snacks")
     local layouts = require("snacks.picker.config.layouts")
+    local diffview = require("diffview")
 
     local select_r = tbl_deep_copy(layouts.select)
     select_r["reverse"] = true
@@ -50,6 +51,12 @@ return {
     local left_r = { preset = "sidebar_r" }
     local right_r = { preset = "sidebar_r", layout = { position = "right" } }
 
+    local git_win = {
+      input = {
+        keys = { ["do"] = { "diffview_open", mode = { "n" } }, ["dO"] = { "diffview_open_full", mode = { "n" } } },
+      },
+    }
+
     snacks.setup({
       picker = {
         enabled = true,
@@ -67,13 +74,32 @@ return {
         layout = function()
           return vim.o.columns >= 120 and { preset = "telescope" } or { preset = "dropdown_r" }
         end,
+        actions = {
+          diffview_open = function(_, item)
+            local target
+            if item.stash or item.branch then
+              target = "HEAD..." .. (item.stash or item.branch)
+            elseif item.commit then
+              target = item.commit .. "^!"
+            end
+            diffview.open({ target })
+          end,
+          diffview_open_full = function(_, item)
+            local target = item.stash or item.branch or item.commit
+            diffview.open({ target })
+          end,
+        },
         sources = {
           commands = { layout = { preset = "ivy_r_no_preview" } },
           command_history = { layout = { preset = "ivy_r_no_preview" } },
           diagnostics = { layout = { preset = "ivy_r" } },
           diagnostics_buffer = { layout = { preset = "ivy_r" } },
           files = { hidden = true },
-          git_branches = { all = true },
+          git_log = { win = git_win },
+          git_log_file = { win = git_win },
+          git_log_line = { win = git_win },
+          git_branches = { all = true, win = git_win },
+          git_stash = { win = git_win },
           registers = { layout = { preset = "ivy_r" } },
           search_history = { layout = { preset = "ivy_r_no_preview" } },
           tmux_windows = { layout = { preset = "ivy_r_no_preview" } },
