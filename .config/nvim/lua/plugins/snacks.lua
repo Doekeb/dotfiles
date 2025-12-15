@@ -102,8 +102,6 @@ return {
           git_stash = { win = git_win },
           registers = { layout = { preset = "ivy_r" } },
           search_history = { layout = { preset = "ivy_r_no_preview" } },
-          tmux_windows = { layout = { preset = "ivy_r_no_preview" } },
-          tmux_sessions = { layout = { preset = "ivy_r_no_preview" } },
         },
         win = {
           input = {
@@ -153,8 +151,10 @@ return {
     vim.keymap.set("n", "<leader>fgS", snacks.picker.git_stash, { desc = "[f]ind [g]it [S]tash" })
     vim.keymap.set("n", "<leader>fgs", snacks.picker.git_status, { desc = "[f]ind [g]it [s]tatus" })
 
+    vim.keymap.set("n", "<leader>ftc", snacks.picker.tmux_clients, { desc = "[f]ind [t]mux [c]lients" })
     vim.keymap.set("n", "<leader>ftp", snacks.picker.tmux_panes, { desc = "[f]ind [t]mux [p]anes" })
     vim.keymap.set("n", "<leader>ftw", snacks.picker.tmux_windows, { desc = "[f]ind [t]mux [w]indows" })
     vim.keymap.set("n", "<leader>fts", snacks.picker.tmux_sessions, { desc = "[f]ind [t]mux [s]essions" })
+    vim.keymap.set("n", "<leader>ftt", snacks.picker.tmux, { desc = "[f]ind [t]mux [t]" })
   end,
 }
