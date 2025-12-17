@@ -7,6 +7,10 @@ return {
   config = function()
     require("gitsigns").setup({
       _on_attach_pre = function(bufnr, callback)
+        local ft = vim.bo[bufnr].filetype
+        if string.match(ft, "git%w+") then
+          return callback()
+        end
         require("gitsigns-yadm").yadm_signs(callback, { bufnr = bufnr })
       end,
       numhl = true,
