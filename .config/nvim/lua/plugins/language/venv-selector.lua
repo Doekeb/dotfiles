@@ -90,5 +90,5 @@ return {
       },
     })
   end,
-  keys = { { "<leader>vs", "<cmd>VenvSelect<cr>" } },
+  keys = { { "<leader>fv", "<cmd>VenvSelect<cr>" } },
 }
