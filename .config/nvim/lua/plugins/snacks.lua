@@ -56,6 +56,7 @@ return {
         keys = { ["do"] = { "diffview_open", mode = { "n" } }, ["dO"] = { "diffview_open_full", mode = { "n" } } },
       },
     }
+    local tmux_win = { input = { keys = { ["ss"] = { "slime_select", mode = { "n" } } } } }
 
     snacks.setup({
       picker = {
@@ -88,6 +89,13 @@ return {
             local target = item.stash or item.branch or item.commit
             diffview.open({ target })
           end,
+          slime_select = function(picker, item)
+            if item.pane_id then
+              picker:close() -- Close the picker first so buffer options apply to the buffer we opened the picker from
+              vim.g.slime_default_config = { socket_name = "default", target_pane = item.pane_id }
+              vim.b.slime_config = { socket_name = "default", target_pane = item.pane_id }
+            end
+          end,
         },
         sources = {
           commands = { layout = { preset = "ivy_r_no_preview" } },
@@ -102,6 +110,8 @@ return {
           git_stash = { win = git_win },
           registers = { layout = { preset = "ivy_r" } },
           search_history = { layout = { preset = "ivy_r_no_preview" } },
+          tmux_panes = { win = tmux_win },
+          tmux = { win = tmux_win },
         },
         win = {
           input = {
