@@ -76,7 +76,7 @@ return {
       settings = {
         basedpyright = {
           disableLanguageServices = true,
-          typeCheckingMode = "off",
+          analysis = { typeCheckingMode = "off" },
           -- analysis = { diagnosticSeverityOverrides = { reportAttributeAccessIssue = "information" } },
         },
       },
