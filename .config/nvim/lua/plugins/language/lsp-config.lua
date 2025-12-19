@@ -56,6 +56,11 @@ return {
         if client:supports_method("workspace/symbol") then
           map("go", snacks.picker.lsp_workspace_symbols, "[g][o] to workspace symbols")
         end
+        if client:supports_method("textDocument/inlayHint") then
+          map("<leader>th", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end, "[t]oggle inlay [h]ints")
+        end
       end,
     })
     vim.lsp.config("basedpyright", {
@@ -70,6 +75,7 @@ return {
       -- },
       settings = {
         basedpyright = {
+          disableLanguageServices = true,
           typeCheckingMode = "off",
           -- analysis = { diagnosticSeverityOverrides = { reportAttributeAccessIssue = "information" } },
         },
