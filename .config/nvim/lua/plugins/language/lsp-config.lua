@@ -64,19 +64,16 @@ return {
       end,
     })
     vim.lsp.config("basedpyright", {
-      -- capabilities = {
-      --   textDocument = {
-      --     hover = {
-      --       contentFormat = { "plaintext" },
-      --     },
-      --     completion = { completionItem = { documentationFormat = { "plaintext" } } },
-      --     signatureHelp = { signatureInformation = { documentationFormat = { "plaintext" } } },
-      --   },
-      -- },
       settings = {
         basedpyright = {
           disableLanguageServices = true,
-          analysis = { typeCheckingMode = "off" },
+          disableOrganizeImports = true,
+          disableTaggedHints = false, -- Still need this for now until ty supports it (??)
+          analysis = {
+            typeCheckingMode = "off",
+            autoImportCompletions = false,
+            diagnosticMode = "openFilesOnly",
+          },
           -- analysis = { diagnosticSeverityOverrides = { reportAttributeAccessIssue = "information" } },
         },
       },
