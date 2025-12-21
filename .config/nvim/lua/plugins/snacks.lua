@@ -53,10 +53,30 @@ return {
 
     local git_win = {
       input = {
-        keys = { ["do"] = { "diffview_open", mode = { "n" } }, ["dO"] = { "diffview_open_full", mode = { "n" } } },
+        keys = {
+          ["do"] = { "diffview_open", mode = { "n" } },
+          ["dO"] = { "diffview_open_full", mode = { "n" } },
+        },
+      },
+      list = {
+        keys = {
+          ["do"] = { "diffview_open" },
+          ["dO"] = { "diffview_open_full" },
+        },
       },
     }
-    local tmux_win = { input = { keys = { ["ss"] = { "slime_select", mode = { "n" } } } } }
+    local tmux_win = {
+      input = {
+        keys = {
+          ["ss"] = { "slime_select", mode = { "n" } },
+        },
+      },
+      list = {
+        keys = {
+          ["ss"] = { "slime_select" },
+        },
+      },
+    }
 
     snacks.setup({
       picker = {
