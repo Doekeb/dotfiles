@@ -70,6 +70,7 @@
     firefox
     yadm
     git
+    ripgrep
   #  wget
   ];
 
