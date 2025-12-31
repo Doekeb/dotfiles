@@ -71,6 +71,10 @@
     yadm
     git
     ripgrep
+  #  dunst
+    mako
+    libnotify
+    hyprlauncher
   #  wget
   ];
 
