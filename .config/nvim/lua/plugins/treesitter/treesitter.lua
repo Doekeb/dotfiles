@@ -4,6 +4,7 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-treesitter/nvim-treesitter-refactor",
   },
+  branch = "master",
   build = ":TSUpdate",
   config = function()
     require("nvim-treesitter.configs").setup({
@@ -19,6 +20,7 @@ return {
         "gitignore",
         "markdown",
         "markdown_inline",
+        "nix",
         "nu",
         "python",
         "query",
