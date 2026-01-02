@@ -79,6 +79,32 @@
     tmux
     nwg-look
   #  wget
+
+    # LSPs and such
+    # "basedpyright",
+    # "bashls",
+    # "biome",
+    # "deno",
+    lua-language-server
+    # "pylsp",
+    # "pyright",
+    # "ruff",
+    # "taplo",
+    # "ty",
+    # "vimls",
+    # "vtsls",
+    # "flake8",
+    # "mypy",
+    # "pylint",
+    # "sqlfluff",
+    # "biome",
+    # "black",
+    # "isort",
+    # "sqlfluff",
+    # "stylua",
+    # "yq",
+    # "yaml-language-server",
+    # "cronstrue"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
