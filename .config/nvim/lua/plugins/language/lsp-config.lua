@@ -88,6 +88,9 @@ return {
     vim.lsp.enable("basedpyright")
     vim.lsp.enable("ruff")
     vim.lsp.enable("ty")
+    -- Nix
+    vim.lsp.enable("nixd")
+    vim.lsp.enable("nil_ls")
   end,
 }
 -- return {
