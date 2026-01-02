@@ -5,12 +5,15 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # nix = {
   #   package = pkgs.nixFlakes;
   #   extraOptions = ''
@@ -60,8 +63,11 @@
   users.users.doeke = {
     isNormalUser = true;
     description = "Doeke Buursma";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -86,7 +92,7 @@
     hyprlauncher
     tmux
     nwg-look
-  #  wget
+    #  wget
 
     # LSPs and such
     # "basedpyright",
@@ -94,6 +100,8 @@
     # "biome",
     # "deno",
     lua-language-server
+    nixd
+    nil
     # "pylsp",
     # "pyright",
     # "ruff",
