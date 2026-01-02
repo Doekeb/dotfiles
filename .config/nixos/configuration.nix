@@ -60,6 +60,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.hyprland.enable = true;
+  programs.waybar.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -71,10 +72,12 @@
     yadm
     git
     ripgrep
-  #  dunst
+    # dunst
     mako
     libnotify
     hyprlauncher
+    tmux
+    nwg-look
   #  wget
   ];
 
