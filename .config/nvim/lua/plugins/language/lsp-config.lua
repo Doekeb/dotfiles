@@ -84,6 +84,8 @@ return {
     vim.lsp.enable("vtsls")
     -- Lua
     vim.lsp.enable("lua_ls")
+    -- Vim
+    vim.lsp.enable("vimls")
     -- Python
     vim.lsp.enable("basedpyright")
     vim.lsp.enable("ruff")
@@ -91,6 +93,8 @@ return {
     -- Nix
     vim.lsp.enable("nixd")
     vim.lsp.enable("nil_ls")
+    -- Hyprland
+    vim.lsp.enable("hyprls")
   end,
 }
 -- return {
