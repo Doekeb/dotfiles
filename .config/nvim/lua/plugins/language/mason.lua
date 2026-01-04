@@ -1,13 +1,14 @@
-local file = io.open('/etc/lsb-release', 'r')
+local file = io.open("/etc/lsb-release", "r")
 local is_nix
-for line in file:lines() do
-  if line:match('DISTRIB_ID=(.*)') == 'nixos' then
-    is_nix = true
+if file then
+  for line in file:lines() do
+    if line:match("DISTRIB_ID=(.*)") == "nixos" then
+      is_nix = true
+    end
   end
 end
 
 if is_nix then
-  vim.print("Nix detected - no Mason")
   return {}
 else
   return {
