@@ -7,7 +7,12 @@
 {
   imports = [
     # Include the results of the hardware scan.
+    ./cli-tools.nix
     ./hardware-configuration.nix
+    ./lsp.nix
+    ./nautilus.nix
+    ./neovim.nix
+    ./shells.nix
   ];
 
   nix.settings.experimental-features = [
@@ -73,54 +78,51 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    # wayland.windowManager.hyprland.systemd.enable = false; # Uncomment if using home manager
+  };
   programs.waybar.enable = true;
+  programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
+    slack
+    # neovim
+    kdePackages.dolphin
     kitty
-    firefox
     yadm
     git
-    ripgrep
+    xdg-utils # e.g. xdg-open to open links in default browser
+
+    # Notification daemon(s)
     # dunst
     mako
-    libnotify
+
+    libnotify # Provides notify-send
+
     hyprlauncher
     tmux
-    nwg-look
+    nwg-look # gtk theming
+    brightnessctl # Control screen brightness
     #  wget
+  ];
 
-    # LSPs and such
-    # "basedpyright",
-    # "bashls",
-    # "biome",
-    # "deno",
-    lua-language-server
-    nixd
-    nil
-    # "pylsp",
-    # "pyright",
-    # "ruff",
-    # "taplo",
-    # "ty",
-    # "vimls",
-    # "vtsls",
-    # "flake8",
-    # "mypy",
-    # "pylint",
-    # "sqlfluff",
-    # "biome",
-    # "black",
-    # "isort",
-    # "sqlfluff",
-    # "stylua",
-    # "yq",
-    # "yaml-language-server",
-    # "cronstrue"
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  fonts.packages = with pkgs; [
+    nerd-fonts.noto
+    # noto-fonts
+    # noto-fonts-cjk-sans
+    # noto-fonts-color-emoji
+    # liberation_ttf
+    # fira-code
+    # fira-code-symbols
+    # mplus-outline-fonts.githubRelease
+    # dina-font
+    # proggyfonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
