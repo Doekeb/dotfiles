@@ -12,7 +12,10 @@
     ./lsp.nix
     ./nautilus.nix
     ./neovim.nix
+    ./notion-app.nix
+    ./programs.nix
     ./shells.nix
+    ./users.nix
   ];
 
   nix.settings.experimental-features = [
@@ -64,17 +67,6 @@
     variant = "";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.doeke = {
-    isNormalUser = true;
-    description = "Doeke Buursma";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    packages = with pkgs; [ ];
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -84,13 +76,12 @@
     # wayland.windowManager.hyprland.systemd.enable = false; # Uncomment if using home manager
   };
   programs.waybar.enable = true;
-  programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    slack
     # neovim
     kdePackages.dolphin
     kitty
