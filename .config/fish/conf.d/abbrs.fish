@@ -1,0 +1,6 @@
+abbr -a -- fc 'nvim --cmd "cd ~/.config/fish"'
+abbr -a -- hc 'nvim --cmd "cd ~/.config/hypr"'
+abbr -a -- nc 'nvim --cmd "cd ~/.config/nixos"'
+abbr -a -- tc 'nvim --cmd "cd ~/.config/tmux"'
+abbr -a -- vc 'nvim --cmd "cd ~/.config/nvim"'
+abbr -a -- nr 'sudo nixos-rebuild --flake ~/.config/nixos/#doeke-lemur-pro switch'
