@@ -9,6 +9,7 @@
     # Include the results of the hardware scan.
     ./cli-tools.nix
     ./hardware-configuration.nix
+    ./desktop.nix
     ./lsp.nix
     ./nautilus.nix
     ./neovim.nix
