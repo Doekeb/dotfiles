@@ -10,6 +10,7 @@
     ./cli-tools.nix
     ./hardware-configuration.nix
     ./desktop.nix
+    ./fonts.nix
     ./lsp.nix
     ./nautilus.nix
     ./neovim.nix
@@ -104,18 +105,6 @@
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  fonts.packages = with pkgs; [
-    nerd-fonts.noto
-    # noto-fonts
-    # noto-fonts-cjk-sans
-    # noto-fonts-color-emoji
-    # liberation_ttf
-    # fira-code
-    # fira-code-symbols
-    # mplus-outline-fonts.githubRelease
-    # dina-font
-    # proggyfonts
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
