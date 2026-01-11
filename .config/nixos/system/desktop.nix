@@ -1,7 +1,22 @@
 { config, pkgs, ... }:
 {
-  services.gvfs.enable = true;
   environment.systemPackages = with pkgs; [
     rofi
   ];
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd hyprland";
+        user = "greeter";
+      };
+      # default_session = initial_session;
+    };
+  };
+  environment.etc."greetd/environments".text = ''
+    hyprland
+    fish
+    bash
+  '';
 }
