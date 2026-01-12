@@ -2,15 +2,22 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
-    # Include the results of the hardware scan.
+    inputs.home-manager.nixosModules.default
+    # inputs.stylix.nixosModules.stylix
     ./cli-tools.nix
-    ./hardware-configuration.nix
     ./desktop.nix
     ./fonts.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
     ./lsp.nix
     ./nautilus.nix
     ./neovim.nix
@@ -19,6 +26,18 @@
     ./shells.nix
     ./users.nix
   ];
+
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
+  };
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "doeke" = import ./home.nix;
+    };
+  };
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -77,7 +96,7 @@
     withUWSM = true;
     # wayland.windowManager.hyprland.systemd.enable = false; # Uncomment if using home manager
   };
-  programs.waybar.enable = true;
+  # programs.waybar.enable = true;
   programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -86,7 +105,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     # neovim
     kdePackages.dolphin
-    kitty
+    # kitty
     yadm
     git
     xdg-utils # e.g. xdg-open to open links in default browser
@@ -97,11 +116,15 @@
 
     libnotify # Provides notify-send
 
+    hyprpaper
     hyprlauncher
     tmux
     nwg-look # gtk theming
     brightnessctl # Control screen brightness
     #  wget
+
+    # Themes
+    base16-schemes
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
