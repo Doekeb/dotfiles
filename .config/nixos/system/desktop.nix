@@ -14,9 +14,9 @@
       # default_session = initial_session;
     };
   };
-  environment.etc."greetd/environments".text = ''
-    hyprland
-    fish
-    bash
-  '';
+  # environment.etc."greetd/environments".text = ''
+  #   hyprland
+  #   fish
+  #   bash
+  # '';
 }

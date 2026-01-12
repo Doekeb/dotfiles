@@ -9,10 +9,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # stylix = {
+    #   url = "github:nix-community/stylix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     # STABLE
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -24,7 +24,7 @@
     {
       nixpkgs,
       home-manager,
-      stylix,
+      # stylix,
       ...
     }@inputs:
     {
@@ -35,7 +35,7 @@
           modules = [
             ./system
             home-manager.nixosModules.default
-            stylix.nixosModules.stylix
+            # stylix.nixosModules.stylix
           ];
         };
       };
