@@ -171,6 +171,7 @@ return {
     vim.keymap.set("n", "<leader>fE", snacks.picker.diagnostics, { desc = "[f]ind all [E]rrors" })
     vim.keymap.set("n", "<leader>fh", snacks.picker.help, { desc = "[f]ind [h]elp" })
     vim.keymap.set("n", "<leader>fj", snacks.picker.jumps, { desc = "[f]ind [j]umps" })
+    vim.keymap.set("n", "<leader>fm", snacks.picker.man, { desc = "[f]ind [m]an pages" })
     vim.keymap.set("n", "<leader>fp", snacks.picker.projects, { desc = "[f]ind [p]rojects" })
     vim.keymap.set("n", "<leader>fu", snacks.picker.undo, { desc = "[f]ind [u]ndo tree" })
 

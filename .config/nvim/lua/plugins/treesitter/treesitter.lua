@@ -47,7 +47,6 @@ return {
       auto_install = not is_nix,
       modules = {},
       sync_install = false,
-      highlight = { enable = true },
       indent = { enable = true },
       incremental_selection = {
         enable = true,
