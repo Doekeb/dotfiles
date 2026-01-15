@@ -10,143 +10,22 @@ end
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/nvim-treesitter-refactor",
-  },
-  branch = "master",
+  lazy = false,
   build = not is_nix and ":TSUpdate" or nil,
   config = function()
-    require("nvim-treesitter.configs").setup({
-      ensure_installed = not is_nix and {
-        "bash",
-        "c",
-        "csv",
-        "fish",
-        "ini",
-        "json",
-        "lua",
-        "gitcommit",
-        "gitignore",
-        "markdown",
-        "markdown_inline",
-        "nix",
-        "nu",
-        "python",
-        "query",
-        "rst",
-        "rust",
-        "sql",
-        "tmux",
-        "toml",
-        "vim",
-        "vimdoc",
-        "yaml",
-      } or {},
-      ignore_install = is_nix and { "all" } or {},
-      auto_install = not is_nix,
-      modules = {},
-      sync_install = false,
-      indent = { enable = true },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<A-]>",
-          node_incremental = "<A-]>",
-          scope_incremental = "<A-}>",
-          node_decremental = "<A-[>",
-        },
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            ["al"] = "@loop.outer",
-            ["il"] = "@loop.inner",
-            ["ai"] = "@conditional.outer",
-            ["ii"] = "@conditional.inner",
-            ["as"] = "@statement.outer",
-            ["is"] = "@statement.outer",
-            ["a/"] = "@comment.outer",
-            ["i/"] = "@comment.inner",
-          },
-          selection_modes = {
-            ["@function.outer"] = "V",
-            ["@function.inner"] = "V",
-            ["@class.outer"] = "V",
-            ["@class.inner"] = "V",
-            ["@loop.outer"] = "V",
-            ["@loop.inner"] = "V",
-            ["@conditional.outer"] = "V",
-            ["@conditional.inner"] = "V",
-            ["@statement.outer"] = "V",
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            ["]m"] = "@function.outer",
-            ["]]"] = { query = { "@class.outer", "@function.outer" } },
-            [")"] = "@statement.outer",
-            ["]}"] = "@class.outer",
-            --
-            -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
-            -- ["]o"] = "@loop.*",
-            -- ["]o"] = { query = { "@loop.inner", "@loop.outer" } }
-            --
-            -- You can pass a query group to use query from `queries/<lang>/<query_group>.scm file in your runtime path.
-            -- Below example nvim-treesitter's `locals.scm` and `folds.scm`. They also provide highlights.scm and indent.scm.
-            -- ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-            -- ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-          },
-          goto_next_end = {
-            ["]M"] = "@function.outer",
-            ["]["] = { query = { "@class.outer", "@function.outer" } },
-            ["]{"] = "@class.outer",
-          },
-          goto_previous_start = {
-            ["[m"] = "@function.outer",
-            ["[["] = { query = { "@class.outer", "@function.outer" } },
-            ["("] = "@statement.outer",
-            ["[{"] = "@class.outer",
-          },
-          goto_previous_end = {
-            ["[M"] = "@function.outer",
-            ["[]"] = { query = { "@class.outer", "@function.outer" } },
-            ["[}"] = "@class.outer",
-          },
-          -- Below will go to either the start or the end, whichever is closer.
-          -- Use if you want more granular movements
-          -- Make it even more gradual by adding multiple queries and regex.
-          -- goto_next = {
-          --   ["]d"] = "@conditional.outer",
-          -- },
-          -- goto_previous = {
-          --   ["[d"] = "@conditional.outer",
-          -- },
-        },
-      },
-      refactor = {
-        -- highlight_definitions = {
-        --   enable = true,
-        --   -- Set to false if you have an `updatetime` of ~100.
-        --   clear_on_cursor_move = true,
-        -- },
-        -- highlight_current_scope = { enable = true },
-        smart_rename = {
-          enable = true,
-          -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
-          keymaps = {
-            smart_rename = "<leader>rn",
-          },
-        },
-      },
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "*" },
+      callback = function()
+        pcall(vim.treesitter.start)
+        -- If you need more features:
+        -- if pcall(vim.treesitter.start) then
+        --   -- treesitter-based fold
+        --   vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+        --   vim.wo[0][0].foldmethod = "expr"
+        --   -- treesitter-based indents
+        --   vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        -- end
+      end,
     })
   end,
 }
