@@ -119,6 +119,7 @@
     hyprpaper
     hyprlauncher
     tmux
+    gitmux
     nwg-look # gtk theming
     brightnessctl # Control screen brightness
     #  wget
