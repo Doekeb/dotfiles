@@ -1,6 +1,6 @@
 # /etc/nixos/flake.nix
 {
-  description = "flake for doeke-lemur-pro";
+  description = "flake for lemur-pro";
 
   inputs = {
     # UNSTABLE
@@ -29,7 +29,7 @@
     }@inputs:
     {
       nixosConfigurations = {
-        doeke-lemur-pro = nixpkgs.lib.nixosSystem {
+        lemur-pro = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
