@@ -82,6 +82,8 @@ return {
     vim.lsp.enable("biome")
     vim.lsp.enable("denols")
     vim.lsp.enable("vtsls")
+    -- Shell
+    vim.lsp.enable("bashls")
     -- Lua
     vim.lsp.enable("lua_ls")
     -- Vim
