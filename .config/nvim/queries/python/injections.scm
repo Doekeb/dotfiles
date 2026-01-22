@@ -8,5 +8,5 @@
 ; )
 
 (
-  (string_content) @injection.content (#match? @injection.content "-- !sql") (#set! injection.language "sql")
+  (string_content) @injection.content (#match? @injection.content "-- !sql") (#set! priority 151) (#set! injection.language "sql")
 )
