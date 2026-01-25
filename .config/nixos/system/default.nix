@@ -11,7 +11,7 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.default
+    # inputs.home-manager.nixosModules.default
     # inputs.stylix.nixosModules.stylix
     ./cli-tools.nix
     ./desktop.nix
@@ -32,12 +32,12 @@
   #   base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa.yaml";
   # };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "doeke" = import ./home.nix;
-    };
-  };
+  # home-manager = {
+  #   extraSpecialArgs = { inherit inputs; };
+  #   users = {
+  #     "doeke" = import ./home.nix;
+  #   };
+  # };
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -96,7 +96,7 @@
     withUWSM = true;
     # wayland.windowManager.hyprland.systemd.enable = false; # Uncomment if using home manager
   };
-  # programs.waybar.enable = true;
+  programs.waybar.enable = true;
   programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
@@ -105,7 +105,7 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     # neovim
     kdePackages.dolphin
-    # kitty
+    kitty
     yadm
     git
     xdg-utils # e.g. xdg-open to open links in default browser
