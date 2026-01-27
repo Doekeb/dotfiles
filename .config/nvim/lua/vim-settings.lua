@@ -39,5 +39,11 @@ local colorcolumn = function()
 end
 vim.opt.colorcolumn = colorcolumn()
 
-vim.filetype.add({ filename = { [".flake8"] = "dosini" } })
-vim.filetype.add({ filename = { [".sqlfluff"] = "cfg" } })
+vim.filetype.add({
+  filename = {
+    [".flake8"] = "dosini",
+    [".sqlfluff"] = "cfg",
+    ["docker-compose.yaml"] = "yaml.docker-compose",
+    ["docker-compose.yml"] = "yaml.docker-compose",
+  },
+})
