@@ -665,6 +665,15 @@ c = get_config()  # noqa
 #  Default: {}
 # c.TerminalInteractiveShell.highlighting_style_overrides = {}
 
+from pygments.token import Token
+
+c.TerminalInteractiveShell.highlighting_style_overrides = {
+    Token.Prompt: "#76946A nobold",
+    Token.PromptNum: "#76946A bold",
+    Token.OutPrompt: "#D27E99 nobold",
+    Token.OutPromptNum: "#D27E99 bold",
+}
+
 ## Total length of command history
 #  See also: InteractiveShell.history_length
 # c.TerminalInteractiveShell.history_length = 10000

@@ -23,6 +23,7 @@ else
         "bashls",
         "biome",
         "deno",
+        "dockerfile-language-server",
         "lua_ls",
         "pylsp",
         "pyright",

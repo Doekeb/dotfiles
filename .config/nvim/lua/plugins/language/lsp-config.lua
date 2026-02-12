@@ -78,6 +78,8 @@ return {
         },
       },
     })
+    -- Docker
+    vim.lsp.enable("dockerls")
     -- JS/TS
     vim.lsp.enable("biome")
     vim.lsp.enable("denols")
