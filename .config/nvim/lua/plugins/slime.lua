@@ -29,7 +29,7 @@ return {
         vim.fn.system(table.concat(cmd, " "))
       end
       if active_venv then
-        local activate = { "source", venv_selector.venv_tool_path(active_venv, "activate") }
+        local activate = { "source", venv_selector.venv_tool_path(active_venv, "activate.fish") }
         local cmd = { "tmux", "send-keys", "-t", pane_id, "'" .. table.concat(activate, " ") .. "'", "ENTER" }
         vim.fn.system(table.concat(cmd, " "))
         p = venv_selector.venv_tool_path(active_venv, "ipython") and "'ipython'" or "'python'"

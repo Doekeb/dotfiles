@@ -99,6 +99,8 @@ return {
     vim.lsp.enable("nil_ls")
     -- Hyprland
     vim.lsp.enable("hyprls")
+    -- Typst
+    vim.lsp.enable("tinymist")
   end,
 }
 -- return {
