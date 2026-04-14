@@ -79,6 +79,8 @@ return {
     }
 
     snacks.setup({
+      styles = {},
+      input = { enabled = true, prompt_pos = "left", icon_pos = "title", win = { style = "blame_line" } },
       picker = {
         enabled = true,
         ui_select = true,
