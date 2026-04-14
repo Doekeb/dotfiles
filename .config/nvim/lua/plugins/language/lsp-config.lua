@@ -63,6 +63,7 @@ return {
         end
       end,
     })
+    -- vim.lsp.set_log_level("debug")
     vim.lsp.config("basedpyright", {
       settings = {
         basedpyright = {
@@ -79,9 +80,13 @@ return {
       },
     })
     -- Docker
+    -- vim.lsp.enable("docker_compose_language_service")
+    vim.lsp.enable("docker_language_server")
     vim.lsp.enable("dockerls")
+    -- Github actions
+    vim.lsp.enable("gh_actions_ls")
     -- JS/TS
-    vim.lsp.enable("biome")
+    -- vim.lsp.enable("biome")
     vim.lsp.enable("denols")
     vim.lsp.enable("vtsls")
     -- Shell
