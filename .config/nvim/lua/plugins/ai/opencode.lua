@@ -30,14 +30,23 @@ return {
     vim.keymap.set("n", "<leader>onn", function()
       start_opencode("h")
     end, { desc = "Start opencode" })
-    vim.keymap.set({ "n", "x" }, "<leader>on|", function()
+    vim.keymap.set("n", "<leader>on|", function()
       start_opencode("h")
     end, { desc = "Start opencode to the right" })
-    vim.keymap.set({ "n", "x" }, "<leader>on_", function()
+    vim.keymap.set("n", "<leader>on_", function()
       start_opencode("v")
     end, { desc = "Start opencode below" })
-    vim.keymap.set({ "n", "x" }, "<leader>oa", function()
+
+    vim.keymap.set({ "n", "x" }, "<leader>O", function()
       require("opencode").ask("@this: ", { submit = true })
-    end, { desc = "Ask opencode…" })
+    end, { desc = "Ask [O]pencode" })
+
+    vim.keymap.set({ "n", "x" }, "<leader>o", function()
+      return require("opencode").operator("@this ")
+    end, { desc = "Add to [o]pencode", expr = true })
+
+    vim.keymap.set("n", "<leader>ob", function()
+      return require("opencode").prompt("@buffer ")
+    end, { desc = "Add [o]pencode [b]uffer" })
   end,
 }
