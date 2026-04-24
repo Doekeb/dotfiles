@@ -99,6 +99,8 @@ return {
     vim.lsp.enable("basedpyright")
     vim.lsp.enable("ruff")
     vim.lsp.enable("ty")
+    -- Terraform
+    vim.lsp.enable("terraformls")
     -- Nix
     vim.lsp.enable("nixd")
     vim.lsp.enable("nil_ls")

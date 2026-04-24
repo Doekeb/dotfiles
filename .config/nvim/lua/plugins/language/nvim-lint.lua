@@ -19,6 +19,7 @@ return {
     lint.linters_by_ft = {
       python = lint.python_linters,
       sql = { "sqlfluff" },
+      terraform = { "tflint" },
     }
     vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost" }, {
       callback = function()

@@ -32,11 +32,12 @@ else
         "pyright",
         "ruff",
         "taplo",
+        "terraform-ls",
         "ty",
         "vimls",
         "vtsls",
       }) -- lsp tools
-      vim.list_extend(tools, { "flake8", "mypy", "pylint", "sqlfluff" }) -- nvim-lint tools
+      vim.list_extend(tools, { "flake8", "mypy", "pylint", "sqlfluff", "tflint" }) -- nvim-lint tools
       vim.list_extend(tools, { "biome", "black", "isort", "sqlfluff", "stylua" }) -- conform tools
       vim.list_extend(tools, { "yq", "yaml-language-server", "cronstrue" }) -- bespoke tools
       require("mason-tool-installer").setup({ ensure_installed = tools })
