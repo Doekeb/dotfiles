@@ -2,6 +2,7 @@ return {
   "nickjvandyke/opencode.nvim",
   version = "*", -- Latest stable release
   config = function()
+    local opencode = require("opencode")
     local start_opencode = function(where)
       local new_pane_cmd = "tmux split-window -" .. where .. "dPF '#{pane_id}'"
       local result = vim.fn.systemlist(new_pane_cmd)
@@ -38,15 +39,15 @@ return {
     end, { desc = "Start opencode below" })
 
     vim.keymap.set({ "n", "x" }, "<leader>O", function()
-      require("opencode").ask("@this: ", { submit = true })
+      opencode.ask("@this: ", { submit = true })
     end, { desc = "Ask [O]pencode" })
 
     vim.keymap.set({ "n", "x" }, "<leader>o", function()
-      return require("opencode").operator("@this ")
+      return opencode.operator("@this ")
     end, { desc = "Add to [o]pencode", expr = true })
 
     vim.keymap.set("n", "<leader>ob", function()
-      return require("opencode").prompt("@buffer ")
+      return opencode.prompt("@buffer ")
     end, { desc = "Add [o]pencode [b]uffer" })
   end,
 }
