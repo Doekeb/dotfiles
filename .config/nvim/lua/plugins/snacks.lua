@@ -20,6 +20,7 @@ return {
     local snacks = require("snacks")
     local layouts = require("snacks.picker.config.layouts")
     local diffview = require("diffview")
+    local opencode = require("opencode")
 
     local select_r = tbl_deep_copy(layouts.select)
     select_r["reverse"] = true
@@ -160,6 +161,13 @@ return {
               vim.b.slime_config = { socket_name = "default", target_pane = item.pane_id }
             end
           end,
+          opencode_send = function(picker, item)
+            if item._path then
+              return opencode.prompt(item._path .. " ")
+            elseif item.text then
+              return opencode.prompt(item.text .. " ")
+            end
+          end,
         },
         sources = {
           commands = { layout = { preset = "ivy_r_no_preview" } },
@@ -184,6 +192,7 @@ return {
               ["<c-n>"] = { "preview_scroll_down", mode = { "i", "n" } },
               ["<c-f>"] = { "preview_scroll_right", mode = { "i", "n" } },
               ["<c-b>"] = { "preview_scroll_left", mode = { "i", "n" } },
+              ["o"] = "opencode_send",
             },
           },
           list = {
@@ -192,6 +201,7 @@ return {
               ["<c-n>"] = "preview_scroll_down",
               ["<c-f>"] = "preview_scroll_right",
               ["<c-b>"] = "preview_scroll_left",
+              ["o"] = "opencode_send",
             },
           },
         },
