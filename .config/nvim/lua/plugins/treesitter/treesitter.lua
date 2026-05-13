@@ -10,6 +10,7 @@ end
 
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
   lazy = false,
   build = not is_nix and ":TSUpdate" or nil,
   config = function()
