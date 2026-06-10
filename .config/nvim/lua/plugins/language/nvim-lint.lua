@@ -8,17 +8,17 @@ return {
       return x ~= "--hide-error-codes"
     end, lint.linters.mypy.args)
 
-    lint.linters.sqlfluff.args = {
-      "lint",
-      "--format=json",
-      -- note: users will have to replace the --dialect argument accordingly
-      -- "--dialect=postgres",
-    }
+    -- lint.linters.sqlfluff.args = {
+    --   "lint",
+    --   "--format=json",
+    --   -- note: users will have to replace the --dialect argument accordingly
+    --   -- "--dialect=postgres",
+    -- }
     lint.python_linters = {}
 
     lint.linters_by_ft = {
       python = lint.python_linters,
-      sql = { "sqlfluff" },
+      -- sql = { "sqlfluff" },
       terraform = { "tflint" },
     }
     vim.api.nvim_create_autocmd({ "BufRead", "BufWritePost" }, {
