@@ -22,6 +22,22 @@ return {
     local diffview = require("diffview")
     local opencode = require("opencode")
 
+    local diffview_open = function(_, item, opts)
+      local target
+      if opts.full then
+        target = item.stash or item.branch or item.commit
+      elseif item.stash or item.branch then
+        if opts.head == "first" then
+          target = "HEAD..." .. (item.stash or item.branch)
+        elseif opts.head == "last" then
+          target = (item.stash or item.branch) .. "...HEAD"
+        end
+      elseif item.commit then
+        target = item.commit .. "^!"
+      end
+      return diffview.open({ target })
+    end
+
     local select_r = tbl_deep_copy(layouts.select)
     select_r["reverse"] = true
     select_r.layout[1], select_r.layout[2] = select_r.layout[2], select_r.layout[1]
@@ -55,13 +71,15 @@ return {
     local git_win = {
       input = {
         keys = {
-          ["do"] = { "diffview_open", mode = { "n" } },
+          ["doo"] = { "diffview_open", mode = { "n" } },
+          ["dor"] = { "diffview_open_rev", mode = { "n" } },
           ["dO"] = { "diffview_open_full", mode = { "n" } },
         },
       },
       list = {
         keys = {
-          ["do"] = { "diffview_open" },
+          ["doo"] = { "diffview_open" },
+          ["dor"] = { "diffview_open_rev" },
           ["dO"] = { "diffview_open_full" },
         },
       },
@@ -142,17 +160,13 @@ return {
         end,
         actions = {
           diffview_open = function(_, item)
-            local target
-            if item.stash or item.branch then
-              target = "HEAD..." .. (item.stash or item.branch)
-            elseif item.commit then
-              target = item.commit .. "^!"
-            end
-            diffview.open({ target })
+            return diffview_open(_, item, { full = false, head = "first" })
+          end,
+          diffview_open_rev = function(_, item)
+            return diffview_open(_, item, { full = false, head = "last" })
           end,
           diffview_open_full = function(_, item)
-            local target = item.stash or item.branch or item.commit
-            diffview.open({ target })
+            return diffview_open(_, item, { full = true })
           end,
           slime_select = function(picker, item)
             if item.pane_id then
